@@ -34,7 +34,7 @@
 # Visual Studio cache directory
 .vs/
 .vsconfig
-.vscode/extension.json
+.vscode/extensions.json
 .vscode/launch.json
 .vscode/settings.json
 
