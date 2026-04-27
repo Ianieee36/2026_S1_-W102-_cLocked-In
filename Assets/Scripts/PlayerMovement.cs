@@ -17,10 +17,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isSprinting = Keyboard.current !=null && Keyboard.current.leftShiftKey.isPressed;
+        bool isSprinting = Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed;
         currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
 
         rb.linearVelocity = moveInput * currentSpeed;
+
+        Debug.Log(moveInput);
     }
 
     public void Move(InputAction.CallbackContext context)
@@ -28,3 +30,5 @@ public class PlayerMovement : MonoBehaviour
         moveInput = context.ReadValue<Vector2>();
     }
 }
+
+

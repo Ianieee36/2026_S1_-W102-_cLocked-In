@@ -388,9 +388,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 291670945}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e863b1f91b528c40ab2dcf903e4d0a0, type: 3}
+  m_Script: {fileID: 11500000, guid: c80148fd3763f3447902768544cfac23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  menuCanvas: {fileID: 0}
 --- !u!114 &291670950
 MonoBehaviour:
   m_ObjectHideFlags: 0
