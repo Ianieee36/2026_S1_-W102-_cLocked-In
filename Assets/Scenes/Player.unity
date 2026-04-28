@@ -280,6 +280,7 @@ GameObject:
   - component: {fileID: 46929959}
   - component: {fileID: 46929961}
   - component: {fileID: 46929960}
+  - component: {fileID: 46929962}
   m_Layer: 5
   m_Name: Inventory
   m_TagString: Untagged
@@ -344,6 +345,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46929958}
   m_CullTransparentMesh: 1
+--- !u!114 &46929962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46929958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
+  m_Padding:
+    m_Left: 100
+    m_Right: 100
+    m_Top: 100
+    m_Bottom: 100
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 100}
+  m_Spacing: {x: 100, y: 100}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!1 &81632452
 GameObject:
   m_ObjectHideFlags: 0
@@ -912,6 +937,7 @@ GameObject:
   m_Component:
   - component: {fileID: 412583776}
   - component: {fileID: 412583775}
+  - component: {fileID: 412583777}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -946,6 +972,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &412583777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412583774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9444080eb906eff40954d4e10d4ce88d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  inventoryPanel: {fileID: 46929958}
+  slotPrefab: {fileID: 1769220621819605480, guid: bcc7c74cb1f24134b95b1c9dd5c8d5dc, type: 3}
+  slotCount: 24
 --- !u!1 &416811717
 GameObject:
   m_ObjectHideFlags: 0
