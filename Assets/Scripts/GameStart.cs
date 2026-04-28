@@ -30,5 +30,9 @@ public class GameStart : MonoBehaviour
         SceneManager.LoadScene("UI", LoadSceneMode.Additive);
         SceneManager.LoadScene("Player", LoadSceneMode.Additive);
         SceneManager.LoadScene("Boss", LoadSceneMode.Additive);
+        SceneManager.LoadScene("AccessibilityMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("AudioMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("GameSettingsMenu", LoadSceneMode.Additive);
+        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
     }
 }
