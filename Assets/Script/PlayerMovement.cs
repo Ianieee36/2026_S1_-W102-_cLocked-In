@@ -3,32 +3,68 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float moveSpeed = 5f;
-    private float sprintSpeed = 10f;
-    private float currentSpeed;
     private Rigidbody2D rb;
+    private Camera mainCamera;
+
+    [SerializeField] private float moveSpeed = 10f;
+
     private Vector2 moveInput;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private bool mouseHeld;
+
+    public void OnMove(InputValue value)
+    {
+        moveInput = value.Get<Vector2>();
+    }
+
+    public void OnMouseMove(InputValue value)
+    {
+        mouseHeld = value.Get<float>() > 0;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        mainCamera = Camera.main;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        bool isSprinting = Keyboard.current != null && Keyboard.current.leftShiftKey.isPressed;
-        currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
-
-        rb.linearVelocity = moveInput * currentSpeed;
-
-        Debug.Log(moveInput);
+        if (mouseHeld)
+        {
+            MoveToMouse();
+        }
+        else
+        {
+            MoveWithKeyboard();
+        }
     }
 
-    public void Move(InputAction.CallbackContext context)
+    private void MoveWithKeyboard()
     {
-        moveInput = context.ReadValue<Vector2>();
+        Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(newPosition);
+    }
+
+    private void MoveToMouse()
+    {
+        Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
+
+        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(
+            new Vector3(
+                mouseScreenPosition.x,
+                mouseScreenPosition.y,
+                Mathf.Abs(mainCamera.transform.position.z)
+            )
+        );
+
+        Vector2 target = mouseWorldPosition;
+
+        Vector2 newPosition = Vector2.MoveTowards(
+            rb.position,
+            target,
+            moveSpeed * Time.fixedDeltaTime
+        );
+
+        rb.MovePosition(newPosition);
     }
 }
-
-
