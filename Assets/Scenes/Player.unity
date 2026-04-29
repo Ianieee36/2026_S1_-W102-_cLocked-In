@@ -413,7 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
   m_Actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -485,6 +485,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 9caa3d8a-6b2f-4e8e-8bad-6ede561bd9be
     m_ActionName: UI/TrackedDeviceOrientation
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 56c72466-f601-4f4d-9cf4-2216212b3098
+    m_ActionName: 'Player/MouseMove[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -600,9 +604,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 644896732}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6b77011295b54536beadb5c47581d95, type: 3}
+  m_Script: {fileID: 11500000, guid: 7d77a2c8673dccf42a80d7ec2fcf9194, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  moveSpeed: 2
+  sprintSpeed: 5
 --- !u!61 &644896739
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1486,5 +1492,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 154526980}
   - {fileID: 892455336}
-  - {fileID: 416811720}
   - {fileID: 644896737}
+  - {fileID: 416811720}

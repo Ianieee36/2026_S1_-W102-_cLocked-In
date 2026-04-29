@@ -6,8 +6,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     private Camera mainCamera;
 
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 10f;
 
+    private bool isSprinting;
     private Vector2 moveInput;
     private bool mouseHeld;
 
@@ -21,6 +23,11 @@ public class PlayerMovement : MonoBehaviour
         mouseHeld = value.Get<float>() > 0;
     }
 
+    public void OnSprint(InputValue value)
+    {
+        isSprinting = value.isPressed;
+    }
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -30,23 +37,28 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         if (mouseHeld)
-        {
             MoveToMouse();
-        }
         else
-        {
             MoveWithKeyboard();
-        }
+    }
+
+    private float GetCurrentSpeed()
+    {
+        return isSprinting ? sprintSpeed : moveSpeed;
     }
 
     private void MoveWithKeyboard()
     {
-        Vector2 newPosition = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
+        float speed = GetCurrentSpeed();
+
+        Vector2 newPosition = rb.position + moveInput * speed * Time.fixedDeltaTime;
         rb.MovePosition(newPosition);
     }
 
     private void MoveToMouse()
     {
+        float speed = GetCurrentSpeed();
+
         Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
 
         Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(
@@ -62,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 newPosition = Vector2.MoveTowards(
             rb.position,
             target,
-            moveSpeed * Time.fixedDeltaTime
+            speed * Time.fixedDeltaTime
         );
 
         rb.MovePosition(newPosition);
