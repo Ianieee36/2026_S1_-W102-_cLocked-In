@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameStart : MonoBehaviour
 {
+
+    public bool disableMainMenu = true; // set to true if you want to skip loading the main menu (for testing purposes)
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,13 +29,22 @@ public class GameStart : MonoBehaviour
     // loads all the scenes we need.
     public void StartGame()
     {
-        SceneManager.LoadScene("Map");
-        SceneManager.LoadScene("UI", LoadSceneMode.Additive);
-        SceneManager.LoadScene("Player", LoadSceneMode.Additive);
-        SceneManager.LoadScene("Boss", LoadSceneMode.Additive);
-        SceneManager.LoadScene("AccessibilityMenu", LoadSceneMode.Additive);
-        SceneManager.LoadScene("AudioMenu", LoadSceneMode.Additive);
-        SceneManager.LoadScene("GameSettingsMenu", LoadSceneMode.Additive);
-        SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+        if (disableMainMenu)
+        {
+            SceneManager.LoadScene("Map");
+            SceneManager.LoadScene("Player", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Boss", LoadSceneMode.Additive);
+        }
+        else
+        {
+            SceneManager.LoadScene("Map");
+            SceneManager.LoadScene("UI", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Player", LoadSceneMode.Additive);
+            SceneManager.LoadScene("Boss", LoadSceneMode.Additive);
+            SceneManager.LoadScene("AccessibilityMenu", LoadSceneMode.Additive);
+            SceneManager.LoadScene("AudioMenu", LoadSceneMode.Additive);
+            SceneManager.LoadScene("GameSettingsMenu", LoadSceneMode.Additive);
+            SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+        }
     }
 }
