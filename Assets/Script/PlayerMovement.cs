@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isSprinting;
     private Vector2 moveInput;
     private bool mouseHeld;
+
+    private Light2D pointLight;
+    private Vector2 lastDir = Vector2.down;
 
     public void OnMove(InputValue value)
     {
@@ -32,6 +36,30 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         mainCamera = Camera.main;
+        pointLight = GetComponentInChildren<Light2D>();
+    }
+
+    void Update()
+    {
+        // Toggle light on F
+        if (Keyboard.current.fKey.wasPressedThisFrame)
+        {
+            pointLight.gameObject.SetActive(!pointLight.gameObject.activeSelf);
+        }
+
+        // Update light direction
+        if (pointLight.gameObject.activeSelf)
+        {
+            if (moveInput != Vector2.zero)
+            {
+                lastDir = moveInput.normalized;
+            }
+
+            pointLight.transform.localPosition = lastDir * 0.5f;
+
+            float angle = Mathf.Atan2(lastDir.y, lastDir.x) * Mathf.Rad2Deg - 90f;
+            pointLight.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        }
     }
 
     void FixedUpdate()
