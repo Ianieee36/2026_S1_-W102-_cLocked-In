@@ -21,8 +21,6 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = isSprinting ? sprintSpeed : moveSpeed;
 
         rb.linearVelocity = moveInput * currentSpeed;
-
-        Debug.Log(moveInput);
     }
 
     public void Move(InputAction.CallbackContext context)
