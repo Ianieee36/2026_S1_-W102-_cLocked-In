@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
             lastDir = moveInput.normalized;
         }
 
-        pointLight.transform.localPosition = lastDir * 0.5f;
+        pointLight.transform.localPosition = Vector2.zero;
 
         float angle = Mathf.Atan2(lastDir.y, lastDir.x) * Mathf.Rad2Deg - 90f;
         pointLight.transform.rotation = Quaternion.Euler(0f, 0f, angle);
