@@ -3,8 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags:
-  - Waypoint
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -53,9 +52,6 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2851661065
-    locked: 0
-  - name: Boss
-    uniqueID: 1811068345
     locked: 0
   - name: WalkBehind
     uniqueID: 2301399423

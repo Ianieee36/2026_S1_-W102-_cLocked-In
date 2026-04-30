@@ -344,7 +344,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 46929958}
   m_CullTransparentMesh: 1
+<<<<<<< HEAD
 --- !u!1 &47936079
+=======
+--- !u!1 &154526977
+>>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -352,22 +356,37 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 47936082}
   - component: {fileID: 47936081}
   - component: {fileID: 47936080}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
+=======
+  - component: {fileID: 154526980}
+  - component: {fileID: 154526979}
+  - component: {fileID: 154526978}
+  m_Layer: 0
+  m_Name: Main Camera
+  m_TagString: MainCamera
+>>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
 --- !u!114 &47936080
 MonoBehaviour:
+=======
+--- !u!81 &154526978
+AudioListener:
+>>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 47936079}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -395,10 +414,17 @@ MonoBehaviour:
     IgnoreY: 0
 --- !u!114 &47936081
 MonoBehaviour:
+=======
+  m_GameObject: {fileID: 154526977}
+  m_Enabled: 1
+--- !u!20 &154526979
+Camera:
+>>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 47936079}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -437,15 +463,70 @@ MonoBehaviour:
       Anamorphism: 0
   BlendHint: 0
 --- !u!4 &47936082
+=======
+  m_GameObject: {fileID: 154526977}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 1
+  orthographic size: 5
+  m_Depth: -1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!4 &154526980
+>>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
   m_GameObject: {fileID: 47936079}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -500.01}
+=======
+  m_GameObject: {fileID: 154526977}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+>>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -538,11 +619,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+<<<<<<< HEAD
   - component: {fileID: 512812741}
   - component: {fileID: 512812743}
   - component: {fileID: 512812742}
   m_Layer: 5
   m_Name: Handle
+=======
+  - component: {fileID: 644896737}
+  - component: {fileID: 644896736}
+  - component: {fileID: 644896735}
+  - component: {fileID: 644896739}
+  - component: {fileID: 644896734}
+  - component: {fileID: 644896733}
+  - component: {fileID: 644896738}
+  m_Layer: 0
+  m_Name: Player
+>>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -724,6 +817,7 @@ MonoBehaviour:
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
+<<<<<<< HEAD
     rgba: 4294967295
   m_fontSize: 32
   m_fontSizeBase: 32
@@ -778,6 +872,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719464106}
   m_CullTransparentMesh: 1
+=======
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: -0.31, y: -0.78}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 8, y: 7.875}
+    newSize: {x: 8, y: 7.875}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 4.12, y: 3.69}
+  m_EdgeRadius: 0
+>>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
 --- !u!1 &743212980
 GameObject:
   m_ObjectHideFlags: 0
@@ -4960,6 +5086,7 @@ RectTransform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 154526980}
   - {fileID: 892455336}
   - {fileID: 416811720}
   - {fileID: 47936082}
