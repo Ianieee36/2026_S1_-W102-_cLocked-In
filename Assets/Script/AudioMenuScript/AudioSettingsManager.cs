@@ -10,31 +10,21 @@ public class AudioSettingsManager : MonoBehaviour
     public void ChangeMasterVolume()
     {
         if (mainAudioMixer == null || masterVol == null) return; 
-        mainAudioMixer.SetFloat("Master", masterVol.value);
+        mainAudioMixer.SetFloat("Master", Mathf.Log10(masterVol.value) * 20);
     }
 
     public void ChangeMusicVolume()
     {
         if (mainAudioMixer == null || musicVol == null) return;
-        mainAudioMixer.SetFloat("Music", musicVol.value);
+        mainAudioMixer.SetFloat("Music", Mathf.Log10(musicVol.value) * 20);
     }
 
     public void ChangeSFXVolume()
     {
         if (mainAudioMixer == null || sfxVol == null) return;
-        mainAudioMixer.SetFloat("SFX", sfxVol.value);
+        mainAudioMixer.SetFloat("SFX", Mathf.Log10(sfxVol.value) * 20);
     }
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
 }

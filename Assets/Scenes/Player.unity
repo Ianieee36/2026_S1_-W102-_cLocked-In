@@ -1916,6 +1916,7 @@ GameObject:
   - component: {fileID: 752423539}
   - component: {fileID: 752423538}
   - component: {fileID: 752423540}
+  - component: {fileID: 752423541}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1968,6 +1969,22 @@ MonoBehaviour:
   itemPrefabs:
   - {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
   - {fileID: 8582252243203131141, guid: 62a5eec61d616f045bb7e7e4e94daf67, type: 3}
+--- !u!114 &752423541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752423537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3273675f8984e134a848dc7f7e0ba786, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AudioSettingsManager
+  masterVol: {fileID: 2064692450}
+  musicVol: {fileID: 1544298572}
+  sfxVol: {fileID: 938414650}
+  mainAudioMixer: {fileID: 24100000, guid: c5a31049cf93d464799db8765fac3ade, type: 2}
 --- !u!1 &763067130
 GameObject:
   m_ObjectHideFlags: 0
@@ -2705,15 +2722,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1526617043}
   m_HandleRect: {fileID: 1277946677}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 752423541}
+        m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
         m_MethodName: ChangeSFXVolume
         m_Mode: 1
         m_Arguments:
@@ -4906,15 +4923,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1183948831}
   m_HandleRect: {fileID: 1524060025}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 752423541}
+        m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
         m_MethodName: ChangeMusicVolume
         m_Mode: 1
         m_Arguments:
@@ -6183,15 +6200,15 @@ MonoBehaviour:
   m_FillRect: {fileID: 1639630125}
   m_HandleRect: {fileID: 719389777}
   m_Direction: 0
-  m_MinValue: -80
-  m_MaxValue: 0
+  m_MinValue: 0.0001
+  m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsMenuManager, Assembly-CSharp
+      - m_Target: {fileID: 752423541}
+        m_TargetAssemblyTypeName: AudioSettingsManager, Assembly-CSharp
         m_MethodName: ChangeMasterVolume
         m_Mode: 1
         m_Arguments:
