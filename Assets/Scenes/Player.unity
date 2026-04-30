@@ -1965,6 +1965,9 @@ MonoBehaviour:
   inventoryPanel: {fileID: 1795609912}
   slotPrefab: {fileID: 1769220621819605480, guid: bcc7c74cb1f24134b95b1c9dd5c8d5dc, type: 3}
   slotCount: 24
+  itemPrefabs:
+  - {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+  - {fileID: 8582252243203131141, guid: 62a5eec61d616f045bb7e7e4e94daf67, type: 3}
 --- !u!1 &763067130
 GameObject:
   m_ObjectHideFlags: 0
@@ -4382,6 +4385,7 @@ GameObject:
   - component: {fileID: 1518901380}
   - component: {fileID: 1518901381}
   - component: {fileID: 1518901382}
+  - component: {fileID: 1518901383}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4654,6 +4658,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MenuController
   menuCanvas: {fileID: 0}
+--- !u!114 &1518901383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518901375}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f8171ed44e0f964390dc7f0255d469f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1524060024
 GameObject:
   m_ObjectHideFlags: 0
