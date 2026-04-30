@@ -35,35 +35,33 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        mainCamera = Camera.main;
+
+        if (mainCamera == null)
+            mainCamera = Camera.main;
+
         pointLight = GetComponentInChildren<Light2D>();
+
+        if (rb == null)
+            Debug.LogError("Missing Rigidbody2D on Player.");
+
+        if (mainCamera == null)
+            Debug.LogError("Main Camera not found. Drag the camera into the Main Camera field or tag it MainCamera.");
+
+        if (pointLight == null)
+            Debug.LogWarning("No Light2D found as child of Player.");
     }
 
     void Update()
     {
-        // Toggle light on F
-        if (Keyboard.current.fKey.wasPressedThisFrame)
+        if (pointLight != null && Keyboard.current.fKey.wasPressedThisFrame)
         {
             pointLight.gameObject.SetActive(!pointLight.gameObject.activeSelf);
         }
-
-        // Update light direction
-        if (pointLight.gameObject.activeSelf)
-        {
-            if (moveInput != Vector2.zero)
-            {
-                lastDir = moveInput.normalized;
-            }
-
-            pointLight.transform.localPosition = lastDir * 0.5f;
-
-            float angle = Mathf.Atan2(lastDir.y, lastDir.x) * Mathf.Rad2Deg - 90f;
-            pointLight.transform.rotation = Quaternion.Euler(0f, 0f, angle);
-        }
     }
-
     void FixedUpdate()
     {
+        UpdateLightDirection();
+
         if (mouseHeld)
             MoveToMouse();
         else
@@ -85,6 +83,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void MoveToMouse()
     {
+        if (rb == null || mainCamera == null || Mouse.current == null)
+            return;
+
         float speed = GetCurrentSpeed();
 
         Vector2 mouseScreenPosition = Mouse.current.position.ReadValue();
@@ -99,6 +100,11 @@ public class PlayerMovement : MonoBehaviour
 
         Vector2 target = mouseWorldPosition;
 
+        Vector2 direction = (target - rb.position).normalized;
+
+        if (direction != Vector2.zero)
+            lastDir = direction;
+
         Vector2 newPosition = Vector2.MoveTowards(
             rb.position,
             target,
@@ -106,5 +112,21 @@ public class PlayerMovement : MonoBehaviour
         );
 
         rb.MovePosition(newPosition);
+    }
+
+    private void UpdateLightDirection()
+    {
+        if (pointLight == null || !pointLight.gameObject.activeSelf)
+            return;
+
+        if (!mouseHeld && moveInput != Vector2.zero)
+        {
+            lastDir = moveInput.normalized;
+        }
+
+        pointLight.transform.localPosition = lastDir * 0.5f;
+
+        float angle = Mathf.Atan2(lastDir.y, lastDir.x) * Mathf.Rad2Deg - 90f;
+        pointLight.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
 }
