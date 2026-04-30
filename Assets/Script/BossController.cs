@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System.Collections;
 
 public class BossController : MonoBehaviour
 {
@@ -17,6 +18,18 @@ public class BossController : MonoBehaviour
     public float decayRate = 0.5f; // Speed at which detection decreasess
     public float timeToLose = 5f; // How lon g the player can stay at max detection before losing
     public float detectedTime = 0f; // How long the player has been at max detection
+
+    [Header("Boss Alert")]
+    public GameObject alertUI; // flashing red UI when the boss detects the player
+    public Animator alertAnimator; // Animator for the alert UI
+    public AudioSource alertAudio; // Audio source for the alert sound
+
+    [Header("Game Over")]
+    public AudioSource gameOverAudio;
+    private bool gameOverTriggered = false;
+
+    private bool alertActive = false; // Whether the alert is currently active
+
 
     // To add waypoints for pattrolling add empty game objects in the map scene and tag them with "Waypoint" and name "Waypoint(n)"
     // The boss will move between these points in order and loop back to the start.
@@ -107,6 +120,35 @@ public class BossController : MonoBehaviour
         }
     }
 
+    void StartAlert()
+    {
+        if (alertActive) return;
+        alertActive = true;
+
+        if(alertUI != null)
+           alertUI.SetActive(true);
+
+        if (alertAnimator != null)
+            alertAnimator.SetTrigger("Alert");
+        
+        if(alertAudio != null)
+            alertAudio.Play();
+
+    }
+
+    void StopAlert()
+    {
+        if(!alertActive) return;
+
+        alertActive = false;
+        
+        if(alertAudio != null)
+            alertAudio.Stop();
+
+        if (alertUI != null)
+            alertUI.SetActive(false);
+    }
+
     void UpdateDetection()
     {
         // Detection logic
@@ -124,6 +166,25 @@ public class BossController : MonoBehaviour
 
             if (detectedTime >= timeToLose)
             {
+                if(!gameOverTriggered)
+                {
+
+                    gameOverTriggered = true;
+
+                    if (alertAudio != null)
+                        alertAudio.Stop(); // Stop alert sound when game is over
+                    
+                    if(alertUI != null)
+                        alertUI.SetActive(false); // Hide alert UI when game is over
+
+                    if (gameOverAudio != null)
+                        gameOverAudio.PlayOneShot(gameOverAudio.clip); // Play game over sound
+
+                    // Delay freeze so sounds plays properly
+                    StartCoroutine(GameOverDelay());
+                }
+                
+
                 Time.timeScale = 0f;
                 // TODO: Game over logic <----------------------------------------------------
             }
@@ -135,10 +196,16 @@ public class BossController : MonoBehaviour
 
         // Detection state
         if (detection >= 1f)
+        {
             state = BossState.Chase;
+            StartAlert(); // Added alert when boss starts chasing
+        }
         else if (detection <= 0f)
+        {
             state = BossState.Patrol;
-
+            StopAlert(); // Added stop alert when boss goes back to patrolling
+        }
+            
 
         // Detection UI Update
         detectionText.text = "Detection: " + Mathf.RoundToInt(detection * 100f) + "%";
@@ -208,4 +275,13 @@ public class BossController : MonoBehaviour
             prevPoint = nextPoint;
         }
     }
+
+    IEnumerator GameOverDelay()
+    {
+        yield return new WaitForSecondsRealtime(0.5f); // small delay so sound plays
+        Time.timeScale = 0f; // Freeze the game
+    }
 }
+
+
+
