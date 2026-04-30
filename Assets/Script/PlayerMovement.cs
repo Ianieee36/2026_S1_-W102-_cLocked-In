@@ -47,7 +47,6 @@ public class PlayerMovement : MonoBehaviour
             pointLight.gameObject.SetActive(!pointLight.gameObject.activeSelf);
         }
 
-<<<<<<< HEAD
         // Update light direction
         if (pointLight.gameObject.activeSelf)
         {
@@ -61,11 +60,6 @@ public class PlayerMovement : MonoBehaviour
             float angle = Mathf.Atan2(lastDir.y, lastDir.x) * Mathf.Rad2Deg - 90f;
             pointLight.transform.rotation = Quaternion.Euler(0f, 0f, angle);
         }
-=======
-        rb.linearVelocity = moveInput * currentSpeed;
-
-        Debug.Log(moveInput);
->>>>>>> parent of 0f791a3 (Added the Boss and BossLogic)
     }
 
     void FixedUpdate()
