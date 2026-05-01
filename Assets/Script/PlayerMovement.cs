@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         if (pointLight == null)
             Debug.LogWarning("No Light2D found as child of Player.");
     }
-
+    //toggle flashlight between on and off when 'f' key is press
     void Update()
     {
         if (pointLight != null && Keyboard.current.fKey.wasPressedThisFrame)
@@ -67,7 +67,9 @@ public class PlayerMovement : MonoBehaviour
         else
             MoveWithKeyboard();
     }
-
+    /*Returns sprint speed when either 'shift' key or right mouse is held
+     * , otherwise returns normal move speed
+     */
     private float GetCurrentSpeed()
     {
         return isSprinting ? sprintSpeed : moveSpeed;
@@ -113,19 +115,22 @@ public class PlayerMovement : MonoBehaviour
 
         rb.MovePosition(newPosition);
     }
-
+    //updates the flashlight direction to match the player movement
     private void UpdateLightDirection()
     {
+        //skips if flash light is toggled off
         if (pointLight == null || !pointLight.gameObject.activeSelf)
             return;
-
+        //When moving with keyboard, update the last known direction
+        //mouse movement handles lastDir inside MoveToMouse
         if (!mouseHeld && moveInput != Vector2.zero)
         {
             lastDir = moveInput.normalized;
         }
-
+        //Keep the light centered on the player 
         pointLight.transform.localPosition = Vector2.zero;
-
+        //convert the direction vector to an angle and rotates the light accordingly
+        //subtract 90 degrees for Unity's default orientation of the light
         float angle = Mathf.Atan2(lastDir.y, lastDir.x) * Mathf.Rad2Deg - 90f;
         pointLight.transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }
