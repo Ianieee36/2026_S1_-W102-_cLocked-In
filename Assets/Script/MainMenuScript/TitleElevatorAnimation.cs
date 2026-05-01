@@ -3,11 +3,11 @@ using System.Collections;
 
 public class TitleElevatorAnimation : MonoBehaviour
 {
-    public float bottomOffset = -150f;
-    public float topOffset = 150f;
+    public float bottomOffset = -150f; // How far down the title should start (off-screen)
+    public float topOffset = 150f; // How far up the title should move before disappearing (off-screen)
 
-    public float moveDuration = 0.8f;
-    public float waitInFrame = 3f;
+    public float moveDuration = 0.8f; // Duration of the elevator movement up and down
+    public float waitInFrame = 3f; // Time to wait while the title is visible in the middle before starting the elevator cycle again
 
     private Vector3 middlePosition;
     private Vector3 bottomPosition;
@@ -45,7 +45,7 @@ public class TitleElevatorAnimation : MonoBehaviour
         }
     }
 
-    IEnumerator Move(Vector3 from, Vector3 to)
+    IEnumerator Move(Vector3 from, Vector3 to) // Coroutine to smoothly move the title from one position to another over the specified duration
     {
         float elapsed = 0f;
 
