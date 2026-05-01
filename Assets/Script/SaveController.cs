@@ -17,7 +17,8 @@ public class SaveController : MonoBehaviour
     {
         SaveData saveData = new SaveData
         {
-            playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position
+            playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position,
+            bossPosition = GameObject.FindGameObjectWithTag("BossCharacter").transform.position
     };
         File.WriteAllText(saveLocation, JsonUtility.ToJson(saveData));
     }
@@ -28,6 +29,7 @@ public class SaveController : MonoBehaviour
         {
             SaveData saveData = JsonUtility.FromJson<SaveData>(File.ReadAllText(saveLocation));
             GameObject.FindGameObjectWithTag("Player").transform.position = saveData.playerPosition;
+            GameObject.FindGameObjectWithTag("BossCharacter").transform.position = saveData.bossPosition;
         } else
         {
             SaveGame();

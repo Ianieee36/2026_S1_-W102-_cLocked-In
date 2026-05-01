@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Waypoint
+  - BossCharacter
   layers:
   - Default
   - TransparentFX
