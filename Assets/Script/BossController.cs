@@ -5,6 +5,7 @@ using System.Collections;
 public class BossController : MonoBehaviour
 {
     public Transform player;
+    public Transform VisionPivot;
     public float moveSpeed = 1.5f;
     public float chaseSpeed = 4f; // Move faster when chasing
 
@@ -222,7 +223,7 @@ public class BossController : MonoBehaviour
         // Check if player is within vision cone and not blocked by obstacles
         Vector2 dir = (player.position - transform.position).normalized;
 
-        float angle = Vector2.Angle(transform.right, dir);
+        float angle = Vector2.Angle(VisionPivot.right, dir);
         if (angle > visionAngle / 2f) return false;
 
         float dist = Vector2.Distance(transform.position, player.position);
@@ -239,13 +240,13 @@ public class BossController : MonoBehaviour
         if (dir.sqrMagnitude < 0.001f) return;
 
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, 10f * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        float angle = Mathf.LerpAngle(VisionPivot.eulerAngles.z, targetAngle, 10f * Time.deltaTime);
+        VisionPivot.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     Vector3 DirFromAngle(float angle)
     {
-        float rad = (angle + transform.eulerAngles.z) * Mathf.Deg2Rad;
+        float rad = (angle + VisionPivot.eulerAngles.z) * Mathf.Deg2Rad;
         return new Vector3(Mathf.Cos(rad), Mathf.Sin(rad));
     }
 
