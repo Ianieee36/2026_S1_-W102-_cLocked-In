@@ -19,6 +19,7 @@ public class BossController : MonoBehaviour
     public float decayRate = 0.5f; // Speed at which detection decreasess
     public float timeToLose = 5f; // How lon g the player can stay at max detection before losing
     public float detectedTime = 0f; // How long the player has been at max detection
+    public float rotationSpeed = 5f; // How fast the boss rotates towards the player
 
     [Header("Boss Alert")]
     public GameObject alertUI; // flashing red UI when the boss detects the player
@@ -240,7 +241,7 @@ public class BossController : MonoBehaviour
         if (dir.sqrMagnitude < 0.001f) return;
 
         float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        float angle = Mathf.LerpAngle(VisionPivot.eulerAngles.z, targetAngle, 10f * Time.deltaTime);
+        float angle = Mathf.LerpAngle(VisionPivot.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
         VisionPivot.rotation = Quaternion.Euler(0, 0, angle);
     }
 
