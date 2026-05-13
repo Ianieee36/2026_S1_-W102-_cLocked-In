@@ -2825,6 +2825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ce7a476a475c4f8ea4fa186300036ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameSettingsButton
+  sceneTransition: {fileID: 1506170961}
 --- !u!1 &1585198565
 GameObject:
   m_ObjectHideFlags: 0
