@@ -27,10 +27,12 @@ public class Printer : MonoBehaviour, IInteractable
 
     private void UsePrinter()
     {
+        Debug.Log("UsePrinter called");
         SetUsed(true);
         if(itemPrefab != null)
         {
-            Instantiate(itemPrefab, transform.position, Quaternion.identity);
+            Debug.Log("Spawning item");
+            Instantiate(itemPrefab, new Vector3(transform.position.x, transform.position.y - 1f, 0f), Quaternion.identity);
         }
     }
 

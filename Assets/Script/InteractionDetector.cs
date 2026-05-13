@@ -3,18 +3,21 @@ using UnityEngine.InputSystem;
 
 public class InteractionDetector : MonoBehaviour
 {
-    private IInteractable interactableInRange = null; //Closest interactable
+    private IInteractable interactableInRange = null;
     public GameObject interactionIcon;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-      interactionIcon. SetActive(false); 
+        interactionIcon.SetActive(false); 
     }
 
-    public void OnInteract(InputAction.CallbackContext context)
+    public void OnInteract(InputValue value)
     {
-      interactableInRange?.Interact(); 
+        if(value.isPressed)
+        {
+            Debug.Log("Interact pressed");
+            interactableInRange?.Interact();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,7 +29,7 @@ public class InteractionDetector : MonoBehaviour
         }
     }
 
-   private void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.TryGetComponent(out IInteractable interactable) && interactable == interactableInRange)
         {
@@ -34,5 +37,4 @@ public class InteractionDetector : MonoBehaviour
             interactionIcon.SetActive(false);
         }
     }
-   
 }
