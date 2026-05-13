@@ -34,6 +34,7 @@ public class GameStart : MonoBehaviour
             SceneManager.LoadScene("Map");
             SceneManager.LoadScene("Player", LoadSceneMode.Additive);
             SceneManager.LoadScene("Boss", LoadSceneMode.Additive);
+            SceneManager.LoadScene("NPCs", LoadSceneMode.Additive);
         }
         else
         {
@@ -45,6 +46,7 @@ public class GameStart : MonoBehaviour
             SceneManager.LoadScene("AudioMenu", LoadSceneMode.Additive);
             SceneManager.LoadScene("GameSettingsMenu", LoadSceneMode.Additive);
             SceneManager.LoadScene("MainMenu", LoadSceneMode.Additive);
+            SceneManager.LoadScene("NPCs", LoadSceneMode.Additive);
         }
     }
 }
