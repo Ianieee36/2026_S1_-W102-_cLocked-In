@@ -22,9 +22,10 @@ public class ComputerController : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        Debug.Log("Computer Interact called");
         isOpen = !isOpen;
+        Debug.Log("screenUI is: " + screenUI);
         screenUI.SetActive(isOpen);
-        Time.timeScale = isOpen ? 0f : 1f; // Pause game while screen is open
     }
 
     private void OnTriggerEnter2D(Collider2D other)
