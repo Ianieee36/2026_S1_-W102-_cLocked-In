@@ -6,18 +6,18 @@ public class BossController : MonoBehaviour
 {
     public Transform player;
     public Transform VisionPivot;
-    public float moveSpeed = 1.5f;
-    public float chaseSpeed = 4f; // Move faster when chasing
+    [HideInInspector] public float moveSpeed;
+    [HideInInspector] public float chaseSpeed; // Move faster when chasing
 
-    public float visionRange = 6f; // Vision cone
-    public float visionAngle = 60f; // Vision cone
+    [HideInInspector] public float visionRange; // Vision cone
+    [HideInInspector] public float visionAngle = 60f; // Vision cone
     public float minChaseDistance = 2f; // Stopping distance from player when chasing (just to avoid weird jittering)
     public LayerMask obstacleMask;
 
     public float detection = 0f; // Detection level (0 to 1)
-    public float detectionRate = 1f; // Speed at which detection increases
-    public float decayRate = 0.5f; // Speed at which detection decreasess
-    public float timeToLose = 5f; // How lon g the player can stay at max detection before losing
+    [HideInInspector] public float detectionRate; // Speed at which detection increases
+    [HideInInspector] public float decayRate; // Speed at which detection decreasess
+    [HideInInspector] public float timeToLose; // How lon g the player can stay at max detection before losing
     public float detectedTime = 0f; // How long the player has been at max detection
     public float rotationSpeed = 5f; // How fast the boss rotates towards the player
 
@@ -31,6 +31,7 @@ public class BossController : MonoBehaviour
     private bool gameOverTriggered = false;
 
     private bool alertActive = false; // Whether the alert is currently active
+    public DifficultyManager.Difficulty difficulty; // boss difficulty manager
 
 
     // To add waypoints for pattrolling add empty game objects in the map scene and tag them with "Waypoint" and name "Waypoint(n)"
@@ -49,6 +50,15 @@ public class BossController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         state = BossState.Patrol;
+
+        if (DifficultyManager.Instance != null)
+        {
+            difficulty = DifficultyManager.Instance.currentDifficulty;
+        }
+
+        Debug.Log("Difficulty from manager: " + difficulty); 
+
+        ApplyDifficultySettings(); // it applies difficulty settings at start
 
         // Find player and waypoints in any scene
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -155,10 +165,24 @@ public class BossController : MonoBehaviour
     {
         // Detection logic
         if (CanSeePlayer())
-            detection += detectionRate * Time.deltaTime;
+        {   
+            // it sets the CEO difficulty so the detection makes it instant.
+            if(difficulty == DifficultyManager.Difficulty.CEO)
+            {
+                detection = 1f;
+                state = BossState.Chase;
+                StartAlert();
+            }
+            else
+            {
+                detection += detectionRate * Time.deltaTime;
+            }
+        }
         else
+        {
             detection -= decayRate * Time.deltaTime;
-
+        }
+            
         detection = Mathf.Clamp01(detection);
 
         // Detection time
@@ -221,19 +245,32 @@ public class BossController : MonoBehaviour
 
     bool CanSeePlayer()
     {
-        // Check if player is within vision cone and not blocked by obstacles
-        Vector2 dir = (player.position - transform.position).normalized;
+        // Vision cone origin
+        Vector2 origin = VisionPivot.position;
 
+        // Direction from boss vision to player
+        Vector2 dir = ((Vector2)player.position - origin).normalized;
+
+        // Distance check
+        float dist = Vector2.Distance(origin, player.position);
+
+        if (dist > visionRange)
+            return false;
+
+        // Angle check
         float angle = Vector2.Angle(VisionPivot.right, dir);
-        if (angle > visionAngle / 2f) return false;
 
-        float dist = Vector2.Distance(transform.position, player.position);
-        if (dist > visionRange) return false;
+        if (angle > visionAngle / 2f)
+            return false;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, visionRange, obstacleMask);
-        if (hit.collider != null && hit.collider.transform != player) return false;
+        // Obstacle check
+        RaycastHit2D hit = Physics2D.Raycast(origin, dir, visionRange, obstacleMask);
+
+        if (hit.collider != null && hit.collider.transform != player)
+            return false;
 
         return true;
+    
     }
 
     void RotateTowards(Vector2 dir)
@@ -257,7 +294,7 @@ public class BossController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        Vector3 origin = transform.position;
+        Vector3 origin = VisionPivot.position;
         float halfAngle = visionAngle / 2f;
 
         Vector3 leftDir = DirFromAngle(-halfAngle);
@@ -282,6 +319,20 @@ public class BossController : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(0.5f); // small delay so sound plays
         Time.timeScale = 0f; // Freeze the game
+    }
+
+    // the boss's state is based on the difficulty manager 
+    // where boss's state is fixed based on the difficulty (Intern, Senior, CEO).
+    void ApplyDifficultySettings()
+    {
+        DifficultyManager diff = DifficultyManager.Instance;
+
+        moveSpeed = diff.moveSpeed;
+        chaseSpeed = diff.chaseSpeed;
+        visionRange = diff.visionRange;
+        detectionRate = diff.detectionRate;
+        decayRate = diff.decayRate;
+        timeToLose = diff.timeToLose; 
     }
 }
 
