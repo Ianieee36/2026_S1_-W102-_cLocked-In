@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.AI;
 using TMPro;
 using System.Collections;
 
 public class BossController : MonoBehaviour
 {
+    UnityEngine.AI.NavMeshAgent agent;
+
     public Transform player;
     public Transform VisionPivot;
     public float moveSpeed = 1.5f;
@@ -40,14 +43,18 @@ public class BossController : MonoBehaviour
 
     public TextMeshProUGUI detectionText;
 
-    Rigidbody2D rb;
+    //Rigidbody2D rb;
 
     enum BossState { Patrol, Chase }
     BossState state;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
+        //rb = GetComponent<Rigidbody2D>();
         state = BossState.Patrol;
 
         // Find player and waypoints in any scene
@@ -80,25 +87,38 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void MoveTo(Vector2 target)
-    {
-        // Move towards target (either player or waypoint)
-        Vector2 dir = (target - (Vector2)transform.position).normalized;
-        rb.linearVelocity = dir * moveSpeed;
+    //void MoveTo(Vector2 target)
+    //{
+    //    // Move towards target (either player or waypoint)
+    //    Vector2 dir = (target - (Vector2)transform.position).normalized;
+    //    rb.linearVelocity = dir * moveSpeed;
         
-        // Rotate towards movement direction
-        RotateTowards(dir);
-    }
+    //    // Rotate towards movement direction
+    //    RotateTowards(dir);
+    //}
 
     void Patrol()
     {
         // Sets target to current waypoint
         Transform target = waypoints[currentWaypoint];
 
-        MoveTo(target.position);
+        //MoveTo(target.position);
 
         // If close enough to the waypoint switch to the next one
-        if (Vector2.Distance(transform.position, target.position) < 0.2f)
+        //if (Vector2.Distance(transform.position, target.position) < 0.2f)
+        //{
+        //    currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
+        //}
+
+        agent.speed = moveSpeed;
+        agent.SetDestination(target.position);
+
+        Vector2 dir = ((Vector2)agent.velocity).normalized;
+
+        if (dir.sqrMagnitude > 0.01f)
+            RotateTowards(dir);
+
+        if (!agent.pathPending && agent.remainingDistance < 0.2f)
         {
             currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
         }
@@ -108,17 +128,28 @@ public class BossController : MonoBehaviour
     {
         float dist = Vector2.Distance(transform.position, player.position);
 
-        Vector2 dir = (player.position - transform.position).normalized;
+        // New AI Pathfinding stuff
+        agent.speed = chaseSpeed;
+
+        //Vector2 dir = (player.position - transform.position).normalized;
 
         // Stops chasing when really close to avoid weird jittering.
         if (dist > minChaseDistance)
         {
-            rb.linearVelocity = dir * chaseSpeed;
-            RotateTowards(dir);
+            //rb.linearVelocity = dir * chaseSpeed;
+            //RotateTowards(dir);
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+
+            Vector2 dir = ((Vector2)agent.velocity).normalized;
+
+            if (dir.sqrMagnitude > 0.01f)
+                RotateTowards(dir);
         }
         else
         {
-            rb.linearVelocity = Vector2.zero;
+            //rb.linearVelocity = Vector2.zero;
+            agent.isStopped = true;
         }
     }
 
@@ -230,8 +261,13 @@ public class BossController : MonoBehaviour
         float dist = Vector2.Distance(transform.position, player.position);
         if (dist > visionRange) return false;
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, visionRange, obstacleMask);
-        if (hit.collider != null && hit.collider.transform != player) return false;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, visionRange);
+
+        if (hit.collider != null)
+        {
+            if (hit.transform != player && ((1 << hit.collider.gameObject.layer) & obstacleMask) != 0)
+                return false;
+        }
 
         return true;
     }
