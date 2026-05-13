@@ -5,17 +5,17 @@ using System.Collections;
 
 public class BossController : MonoBehaviour
 {
-    UnityEngine.AI.NavMeshAgent agent;
+    UnityEngine.AI.NavMeshAgent agent; // Agent for Unity AI Pathfinding
 
-    public Transform player;
-    public Transform VisionPivot;
+    public Transform player; // Variable for the player, you'll have to find player game object on game load because it's not in this scene.
+    public Transform VisionPivot; // Variable for the Vision Cone Pivot, drag and drop into the field in inspector.
     public float moveSpeed = 1.5f;
     public float chaseSpeed = 4f; // Move faster when chasing
 
     public float visionRange = 6f; // Vision cone
     public float visionAngle = 60f; // Vision cone
     public float minChaseDistance = 2f; // Stopping distance from player when chasing (just to avoid weird jittering)
-    public LayerMask obstacleMask;
+    public LayerMask obstacleMask; // Variable for the obstacle mask for boss vision, you'll have to find obstacleMask on game load because it's not in this scene.
 
     public float detection = 0f; // Detection level (0 to 1)
     public float detectionRate = 1f; // Speed at which detection increases
@@ -43,7 +43,7 @@ public class BossController : MonoBehaviour
 
     public TextMeshProUGUI detectionText;
 
-    //Rigidbody2D rb;
+    //Rigidbody2D rb; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
 
     enum BossState { Patrol, Chase }
     BossState state;
@@ -54,7 +54,7 @@ public class BossController : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        //rb = GetComponent<Rigidbody2D>();
+        //rb = GetComponent<Rigidbody2D>(); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
         state = BossState.Patrol;
 
         // Find player and waypoints in any scene
@@ -87,12 +87,12 @@ public class BossController : MonoBehaviour
         }
     }
 
-    //void MoveTo(Vector2 target)
+    //void MoveTo(Vector2 target) // ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
     //{
     //    // Move towards target (either player or waypoint)
     //    Vector2 dir = (target - (Vector2)transform.position).normalized;
     //    rb.linearVelocity = dir * moveSpeed;
-        
+
     //    // Rotate towards movement direction
     //    RotateTowards(dir);
     //}
@@ -102,10 +102,10 @@ public class BossController : MonoBehaviour
         // Sets target to current waypoint
         Transform target = waypoints[currentWaypoint];
 
-        //MoveTo(target.position);
+        //MoveTo(target.position); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
 
-        // If close enough to the waypoint switch to the next one
-        //if (Vector2.Distance(transform.position, target.position) < 0.2f)
+        // If close enough to the waypoint switch to the next one 
+        //if (Vector2.Distance(transform.position, target.position) < 0.2f) ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
         //{
         //    currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
         //}
@@ -131,13 +131,13 @@ public class BossController : MonoBehaviour
         // New AI Pathfinding stuff
         agent.speed = chaseSpeed;
 
-        //Vector2 dir = (player.position - transform.position).normalized;
+        //Vector2 dir = (player.position - transform.position).normalized; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
 
         // Stops chasing when really close to avoid weird jittering.
         if (dist > minChaseDistance)
         {
-            //rb.linearVelocity = dir * chaseSpeed;
-            //RotateTowards(dir);
+            //rb.linearVelocity = dir * chaseSpeed; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
+            //RotateTowards(dir); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
             agent.isStopped = false;
             agent.SetDestination(player.position);
 
@@ -148,7 +148,7 @@ public class BossController : MonoBehaviour
         }
         else
         {
-            //rb.linearVelocity = Vector2.zero;
+            //rb.linearVelocity = Vector2.zero; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
             agent.isStopped = true;
         }
     }
@@ -219,7 +219,7 @@ public class BossController : MonoBehaviour
                 
 
                 Time.timeScale = 0f;
-                // TODO: Game over logic <----------------------------------------------------
+                // TODO: Game over logic <---------------------------------------------------- TODO
             }
         }
         else
