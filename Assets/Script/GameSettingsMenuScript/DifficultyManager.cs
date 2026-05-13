@@ -53,32 +53,32 @@ public class DifficultyManager : MonoBehaviour
         {
             // Intern initial state difficulty
             case Difficulty.Intern:
-                moveSpeed = 2f;
-                chaseSpeed = 1.5f;
+                moveSpeed = 1.5f;
+                chaseSpeed = 2f;
                 visionRange = 3.8f;
                 detectionRate = 0.5f;
                 decayRate = 0.6f;
-                timeToLose = 5.5f;
+                timeToLose = 5f;
                 break;
 
             // Senior initial state difficulty
             case Difficulty.Senior:
-                moveSpeed = 2f;
-                chaseSpeed = 3f;
+                moveSpeed = 1.5f;
+                chaseSpeed = 2.5f;
                 visionRange = 3.8f;
                 detectionRate = 2f;
                 decayRate = 0.2f;
-                timeToLose = 3.5f;
+                timeToLose = 4f;
                 break;
 
             // CEO initial state difficulty
             case Difficulty.CEO:
-                moveSpeed = 2f;
-                chaseSpeed = 6f;
+                moveSpeed = 1.5f;
+                chaseSpeed = 3f;
                 visionRange = 3.8f;
                 detectionRate = 0f;
                 decayRate = 0.01f;
-                timeToLose = 2.5f;
+                timeToLose = 3f;
                 break;
         }
     }
