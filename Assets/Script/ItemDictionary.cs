@@ -9,15 +9,9 @@ public class ItemDictionary : MonoBehaviour
     private void Awake()
     {
         itemDictionary = new Dictionary<int, GameObject>();
-        for(int i =0; i < itemPrefabs.Count; i++)
-        {
-           if(itemPrefabs[i] != null)
-           {
-               itemPrefabs[i].ID = i + 1; // Assign ID starting from 1
-           }
-        }
         foreach(Item item in itemPrefabs)
-        {
+         if(item != null)
+        { 
           itemDictionary[item.ID] = item.gameObject;
         }
     }
