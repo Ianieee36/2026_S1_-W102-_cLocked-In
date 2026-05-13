@@ -10,7 +10,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
       propertyPath: m_Name
-      value: CupofJoeItem Variant
+      value: CupofJoeItem Varient
+      objectReference: {fileID: 0}
+    - target: {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3453228539779676674, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
       propertyPath: m_Pivot.x

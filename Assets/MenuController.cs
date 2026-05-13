@@ -13,7 +13,7 @@ public class MenuController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Keyboard.current.eKey.wasPressedThisFrame)
+        if (Keyboard.current.tabKey.wasPressedThisFrame)
         {
             bool isOpen = !menuCanvas.activeSelf;
             menuCanvas.SetActive(!menuCanvas.activeSelf);
