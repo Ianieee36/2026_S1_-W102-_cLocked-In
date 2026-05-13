@@ -1039,10 +1039,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1506170958}
-        m_TargetAssemblyTypeName: DifficultyManager, Assembly-CSharp
-        m_MethodName: SetDifficulty
-        m_Mode: 5
+      - m_Target: {fileID: 1506170963}
+        m_TargetAssemblyTypeName: GameSettingsButton, Assembly-CSharp
+        m_MethodName: SelectIntern
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1768,10 +1768,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1506170958}
-        m_TargetAssemblyTypeName: DifficultyManager, Assembly-CSharp
-        m_MethodName: SetDifficulty
-        m_Mode: 5
+      - m_Target: {fileID: 1506170963}
+        m_TargetAssemblyTypeName: GameSettingsButton, Assembly-CSharp
+        m_MethodName: SelectCEO
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2631,6 +2631,7 @@ GameObject:
   - component: {fileID: 1506170960}
   - component: {fileID: 1506170961}
   - component: {fileID: 1506170962}
+  - component: {fileID: 1506170963}
   m_Layer: 0
   m_Name: GameSettingsManager
   m_TagString: Untagged
@@ -2667,6 +2668,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36df759c1e9e306419a3119d688b0bfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DifficultyManager
+  currentDifficulty: 0
+  moveSpeed: 0
+  chaseSpeed: 0
+  visionRange: 0
+  detectionRate: 0
+  decayRate: 0
+  timeToLose: 0
 --- !u!4 &1506170959
 Transform:
   m_ObjectHideFlags: 0
@@ -2805,6 +2813,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1506170963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1506170956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ce7a476a475c4f8ea4fa186300036ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameSettingsButton
 --- !u!1 &1585198565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2926,10 +2946,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1506170958}
-        m_TargetAssemblyTypeName: DifficultyManager, Assembly-CSharp
-        m_MethodName: SetDifficulty
-        m_Mode: 5
+      - m_Target: {fileID: 1506170963}
+        m_TargetAssemblyTypeName: GameSettingsButton, Assembly-CSharp
+        m_MethodName: SelectSenior
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3180,6 +3200,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1506170963}
+        m_TargetAssemblyTypeName: GameSettingsButton, Assembly-CSharp
+        m_MethodName: NewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1506170962}
         m_TargetAssemblyTypeName: UnityEngine.AudioSource, UnityEngine
         m_MethodName: Play
