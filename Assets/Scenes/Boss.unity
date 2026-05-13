@@ -773,6 +773,7 @@ MonoBehaviour:
   alertAnimator: {fileID: 1128010389}
   alertAudio: {fileID: 1492648259}
   gameOverAudio: {fileID: 1740224894}
+  difficulty: 0
   waypoints: []
   detectionText: {fileID: 1361025733}
 --- !u!50 &1437423424

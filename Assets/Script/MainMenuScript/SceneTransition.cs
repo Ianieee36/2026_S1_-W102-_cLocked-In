@@ -5,16 +5,16 @@ using UnityEngine.UI;
 
 public class SceneTransition : MonoBehaviour
 {
-    public Image fadePanel;
-    public float elevatorOpenDelay = 2f;
-    public float fadeDuration = 1.5f;
+    public Image fadePanel; // Reference to the UI Image used for fading effect
+    public float elevatorOpenDelay = 2f; // Time to wait for the elevator opening animation/sound before starting the fade
+    public float fadeDuration = 1.5f; // Duration of the fade to black effect
 
-    public void StartTransition(string sceneName)
+    public void StartTransition(string sceneName) // Method to initiate the scene transition process
     {
         StartCoroutine(Transition(sceneName));
     }
 
-    private IEnumerator Transition(string sceneName)
+    private IEnumerator Transition(string sceneName) // Coroutine to handle the scene transition with fade effect
     {
         // wait for elevator opening animation/sound
         yield return new WaitForSeconds(elevatorOpenDelay);

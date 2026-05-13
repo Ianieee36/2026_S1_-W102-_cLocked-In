@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class BackToAudioSettings : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    
     public void LoadAudioSettings()
     {
-        SceneManager.LoadScene("AudioMenu");
+        SceneManager.LoadScene("AudioMenu"); // Load AudioMenu scene
     }
 }
