@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1168829030423752264}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 860, y: -918.4}
+  m_SizeDelta: {x: 1720, y: 1836.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1085169798167071853
 CanvasRenderer:
@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 849131306856279858}
   - component: {fileID: 5502855094391401907}
   - component: {fileID: 4746846731702035842}
+  - component: {fileID: 6759395734847579334}
   m_Layer: 5
   m_Name: ComputerUI
   m_TagString: Untagged
@@ -111,7 +112,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -2.07063, y: -0.30957}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!223 &849131306856279858
@@ -178,6 +179,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!225 &6759395734847579334
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5306134314392553950}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7078626983522133053
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1168829030423752264}
-  - component: {fileID: 4939145837426050816}
+  - component: {fileID: 4810551318905924314}
   m_Layer: 5
   m_Name: ComputerScreen
   m_TagString: Untagged
@@ -291,7 +304,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0.0025464, y: -0.0029411}
   m_SizeDelta: {x: 1720, y: 1836.8}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &4939145837426050816
+--- !u!114 &4810551318905924314
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
