@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+    private ItemDictionary itemDictionary;
     public GameObject inventoryPanel;
     public GameObject slotPrefab;
     public int slotCount;
@@ -9,6 +11,7 @@ public class InventoryController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        itemDictionary = FindObjectOfType<ItemDictionary>();
         for (int i = 0; i < slotCount; i++)
         {
            Slot slot = Instantiate(slotPrefab, inventoryPanel.transform).GetComponent<Slot>();
@@ -20,4 +23,21 @@ public class InventoryController : MonoBehaviour
             }
         }
     }
+
+    public List<InventorySaveData> GetInventoryItems()
+    {
+        List<InventorySaveData> invData = new List<InventorySaveData>();
+        foreach(Transform slotTransform in inventoryPanel.transform)
+        {
+            Slot slot = slotTransform.GetComponent<Slot>();
+            if(slot.currentItem != null)
+            {
+                Item item = slot.currentItem.GetComponent<Item>();
+                invData.Add(new InventorySaveData { itemID = item.ID, slotIndex = slotTransform.GetSiblingIndex() });
+            }
+        }
+        return invData;
+    }
+
+    public void SetInventoryItems
 }
