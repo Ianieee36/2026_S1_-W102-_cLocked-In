@@ -58,10 +58,9 @@ public class BossController : MonoBehaviour
 
         Debug.Log("Difficulty from manager: " + difficulty); 
 
-        ApplyDifficultySettings(); // it applies difficulty settings at start
-
         // Find player and waypoints in any scene
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        
 
         GameObject[] wpObjects = GameObject.FindGameObjectsWithTag("Waypoint");
 
@@ -73,6 +72,8 @@ public class BossController : MonoBehaviour
         {
             waypoints[i] = wpObjects[i].transform;
         }
+
+        ApplyDifficultySettings(); // it applies difficulty settings at start
     }
 
     void Update()
