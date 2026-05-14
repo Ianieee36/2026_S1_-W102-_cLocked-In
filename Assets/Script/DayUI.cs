@@ -17,7 +17,7 @@ public class DayUI : MonoBehaviour
 
     void Awake()
     {
-        if(Instance == null)
+        if (Instance == null)
             Instance = this;
         else
             Destroy(gameObject);
@@ -25,16 +25,23 @@ public class DayUI : MonoBehaviour
 
     void Update()
     {
-        if(DayManager.Instance == null) return;
+        if (DayManager.Instance == null) return;
 
-        // Update day counter
+        // This was missing!
         dayCounterText.text = "Day " + DayManager.Instance.currentDay;
 
-        // Update time counter - formats as MM:SS
-        float t = DayManager.Instance.currentTime;
-        int minutes = Mathf.FloorToInt(t / 60f);
-        int seconds = Mathf.FloorToInt(t % 60f);
-        timeCounterText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        // Map current time to 9AM - 5PM
+        float startHour = 9f;
+        float endHour = 17f;
+        float totalHours = endHour - startHour;
+        float progress = DayManager.Instance.currentTime / DayManager.Instance.dayLengthInSeconds;
+        float currentHour = startHour + progress * totalHours;
+
+        int hours = Mathf.FloorToInt(currentHour);
+        int minutes = Mathf.FloorToInt((currentHour - hours) * 60f);
+        string period = hours >= 12 ? "PM" : "AM";
+        int displayHour = hours > 12 ? hours - 12 : hours;
+        timeCounterText.text = string.Format("{0}:{1:00} {2}", displayHour, minutes, period);
     }
 
     public void ShowNewDay(int day)
@@ -47,7 +54,22 @@ public class DayUI : MonoBehaviour
     {
         dayPopupText.text = "Day " + day;
         dayPopup.SetActive(true);
+
+        CanvasGroup cg = dayPopup.GetComponent<CanvasGroup>();
+        cg.alpha = 1f;
+
+        // Hold for a bit then fade out
         yield return new WaitForSeconds(popupDuration);
+
+        float fadeDuration = 1f;
+        float elapsed = 0f;
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            yield return null;
+        }
+
         dayPopup.SetActive(false);
     }
 }
