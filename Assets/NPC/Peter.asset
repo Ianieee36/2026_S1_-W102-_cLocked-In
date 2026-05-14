@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3265c6edef679114dbd429c4347663eb, type: 3}
-  m_Name: NewNPCDialogue 1
+  m_Name: Peter
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   npcName: Peter Griffin
-  npcPortrait: {fileID: 0}
+  npcPortrait: {fileID: 21300000, guid: 0f938ef1ed821d54aa9f3f0f696d8957, type: 3}
   dialogueLines:
   - Hey I'm Peter Griffin
   - The Bird is the word
