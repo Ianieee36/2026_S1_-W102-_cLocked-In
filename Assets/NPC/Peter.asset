@@ -18,7 +18,7 @@ MonoBehaviour:
   - Hey I'm Peter Griffin
   - The Bird is the word
   typingSpeed: 0.05
-  voiceSound: {fileID: 8300000, guid: 8df9222f10a0f4372925c65afd0ff65d, type: 3}
+  voiceSound: {fileID: 8300000, guid: 9d6d961bf0dde5f47b311b708597fcbd, type: 3}
   voicePitch: 1
   autoProgressLines: 0100
   autoProgressDelay: 2
