@@ -3,10 +3,16 @@ using System.IO;
 
 public class SaveController : MonoBehaviour
 {
+    public static SaveController Instance; // instance so that other scripts can access it globally.
     private string saveLocation;
     private InventoryController inventoryController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        Instance = this;
+    }
+    
     void Start()
     {
         //Define save location

@@ -77,7 +77,7 @@ public class DifficultyManager : MonoBehaviour
                 chaseSpeed = 3f;
                 visionRange = 3.8f;
                 detectionRate = 0f;
-                decayRate = 0.01f;
+                decayRate = 0.05f;
                 timeToLose = 3f;
                 break;
         }
