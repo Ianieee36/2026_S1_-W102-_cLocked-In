@@ -1,18 +1,21 @@
 using UnityEngine;
+using UnityEngine.AI;
 using TMPro;
 using System.Collections;
 
 public class BossController : MonoBehaviour
 {
-    public Transform player;
-    public Transform VisionPivot;
+    UnityEngine.AI.NavMeshAgent agent; // Agent for Unity AI Pathfinding
+
+    public Transform player; // Variable for the player, you'll have to find player game object on game load because it's not in this scene.
+    public Transform VisionPivot; // Variable for the Vision Cone Pivot, drag and drop into the field in inspector.
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public float chaseSpeed; // Move faster when chasing
 
     [HideInInspector] public float visionRange; // Vision cone
     [HideInInspector] public float visionAngle = 60f; // Vision cone
     public float minChaseDistance = 2f; // Stopping distance from player when chasing (just to avoid weird jittering)
-    public LayerMask obstacleMask;
+    public LayerMask obstacleMask; // Variable for the obstacle mask for boss vision, you'll have to find obstacleMask on game load because it's not in this scene.
 
     public float detection = 0f; // Detection level (0 to 1)
     [HideInInspector] public float detectionRate; // Speed at which detection increases
@@ -43,14 +46,18 @@ public class BossController : MonoBehaviour
 
     public TextMeshProUGUI detectionText;
 
-    Rigidbody2D rb;
+    //Rigidbody2D rb; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
 
     enum BossState { Patrol, Chase }
     BossState state;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
+
+        //rb = GetComponent<Rigidbody2D>(); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
         state = BossState.Patrol;
 
         if (DifficultyManager.Instance != null)
@@ -93,25 +100,39 @@ public class BossController : MonoBehaviour
         }
     }
 
-    void MoveTo(Vector2 target)
-    {
-        // Move towards target (either player or waypoint)
-        Vector2 dir = (target - (Vector2)transform.position).normalized;
-        rb.linearVelocity = dir * moveSpeed;
-        
-        // Rotate towards movement direction
-        RotateTowards(dir);
-    }
+    //void MoveTo(Vector2 target) // ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
+    //{
+    //    // Move towards target (either player or waypoint)
+    //    Vector2 dir = (target - (Vector2)transform.position).normalized;
+    //    rb.linearVelocity = dir * moveSpeed;
+
+    //    // Rotate towards movement direction
+    //    RotateTowards(dir);
+    //}
+
 
     void Patrol()
     {
         // Sets target to current waypoint
         Transform target = waypoints[currentWaypoint];
 
-        MoveTo(target.position);
+        //MoveTo(target.position); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
 
         // If close enough to the waypoint switch to the next one
-        if (Vector2.Distance(transform.position, target.position) < 0.2f)
+        //if (Vector2.Distance(transform.position, target.position) < 0.2f) ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
+        //{
+        //    currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
+        //}
+
+        agent.speed = moveSpeed;
+        agent.SetDestination(target.position);
+
+        Vector2 dir = ((Vector2)agent.velocity).normalized;
+
+        if (dir.sqrMagnitude > 0.01f)
+            RotateTowards(dir);
+
+        if (!agent.pathPending && agent.remainingDistance < 0.2f) // If close enough to the waypoint switch to the next one
         {
             currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
         }
@@ -121,17 +142,28 @@ public class BossController : MonoBehaviour
     {
         float dist = Vector2.Distance(transform.position, player.position);
 
-        Vector2 dir = (player.position - transform.position).normalized;
+        // New AI Pathfinding stuff
+        agent.speed = chaseSpeed;
+
+        //Vector2 dir = (player.position - transform.position).normalized; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
 
         // Stops chasing when really close to avoid weird jittering.
         if (dist > minChaseDistance)
         {
-            rb.linearVelocity = dir * chaseSpeed;
-            RotateTowards(dir);
+            //rb.linearVelocity = dir * chaseSpeed; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
+            //RotateTowards(dir); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
+
+            Vector2 dir = ((Vector2)agent.velocity).normalized;
+
+            if (dir.sqrMagnitude > 0.01f)
+                RotateTowards(dir);
         }
         else
         {
-            rb.linearVelocity = Vector2.zero;
+            //rb.linearVelocity = Vector2.zero; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
+            agent.isStopped = true;
         }
     }
 
@@ -245,33 +277,26 @@ public class BossController : MonoBehaviour
 
     bool CanSeePlayer()
     {
-        // Vision cone origin
-        Vector2 origin = VisionPivot.position;
+        // Check if player is within vision cone and not blocked by obstacles
+        Vector2 dir = (player.position - transform.position).normalized;
 
-        // Direction from boss vision to player
-        Vector2 dir = ((Vector2)player.position - origin).normalized;
-
-        // Distance check
-        float dist = Vector2.Distance(origin, player.position);
-
-        if (dist > visionRange)
-            return false;
-
-        // Angle check
         float angle = Vector2.Angle(VisionPivot.right, dir);
+        if (angle > visionAngle / 2f) return false;
 
-        if (angle > visionAngle / 2f)
-            return false;
+        float dist = Vector2.Distance(transform.position, player.position);
+        if (dist > visionRange) return false;
 
-        // Obstacle check
-        RaycastHit2D hit = Physics2D.Raycast(origin, dir, visionRange, obstacleMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, visionRange);
 
-        if (hit.collider != null && hit.collider.transform != player)
-            return false;
+        if (hit.collider != null)
+        {
+            if (hit.transform != player && ((1 << hit.collider.gameObject.layer) & obstacleMask) != 0)
+                return false;
+        }
 
         return true;
-    
-    }
+
+}
 
     void RotateTowards(Vector2 dir)
     {
