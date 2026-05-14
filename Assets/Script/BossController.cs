@@ -33,6 +33,8 @@ public class BossController : MonoBehaviour
     private bool alertActive = false; // Whether the alert is currently active
     public DifficultyManager.Difficulty difficulty; // boss difficulty manager
 
+    [Header("Chances")]
+
 
     // To add waypoints for pattrolling add empty game objects in the map scene and tag them with "Waypoint" and name "Waypoint(n)"
     // The boss will move between these points in order and loop back to the start.
@@ -164,8 +166,10 @@ public class BossController : MonoBehaviour
 
     void UpdateDetection()
     {
+        bool canSeePlayer = CanSeePlayer();
+
         // Detection logic
-        if (CanSeePlayer())
+        if (canSeePlayer)
         {   
             // it sets the CEO difficulty so the detection makes it instant.
             if(difficulty == DifficultyManager.Difficulty.CEO)
@@ -187,7 +191,7 @@ public class BossController : MonoBehaviour
         detection = Mathf.Clamp01(detection);
 
         // Detection time
-        if (detection >= 0.9f)
+        if (canSeePlayer && detection >= 0.9f)
         {
             detectedTime += Time.deltaTime;
 
@@ -195,7 +199,6 @@ public class BossController : MonoBehaviour
             {
                 if(!gameOverTriggered)
                 {
-
                     gameOverTriggered = true;
 
                     if (alertAudio != null)
@@ -207,13 +210,9 @@ public class BossController : MonoBehaviour
                     if (gameOverAudio != null)
                         gameOverAudio.PlayOneShot(gameOverAudio.clip); // Play game over sound
 
-                    // Delay freeze so sounds plays properly
-                    StartCoroutine(GameOverDelay());
+                    TryAgain.Instance.PlayerCaught(); // Try again option when caught
                 }
                 
-
-                Time.timeScale = 0f;
-                // TODO: Game over logic <----------------------------------------------------
             }
         }
         else
@@ -334,6 +333,16 @@ public class BossController : MonoBehaviour
         detectionRate = diff.detectionRate;
         decayRate = diff.decayRate;
         timeToLose = diff.timeToLose; 
+    }
+
+    public void ResetAfterCaught()
+    {
+        detection = 0f;
+        detectedTime = 0f;
+        gameOverTriggered = false;
+
+        state = BossState.Patrol;
+        StopAlert();
     }
 }
 
