@@ -7,4 +7,5 @@ public class SaveData
     public Vector3 playerPosition;
     public Vector3 bossPosition;
     public List<InventorySaveData> inventorySaveData;
+    public List<InventorySaveData> hotbarSaveData;
 }

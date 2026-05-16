@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: ID
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -1168759825724957610, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: Name
+      value: Cup of coffee
+      objectReference: {fileID: 0}
+    - target: {fileID: -1168759825724957610, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
       propertyPath: m_Name
       value: CupofJoeItem Varient
@@ -108,8 +116,34 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1098600780904815229, guid: bdaef637b8eb274488ae1ecc050b7bd8, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -1168759825724957610, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -518826737700850077}
   m_SourcePrefab: {fileID: 100100000, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+--- !u!1 &8582252243203131141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+  m_PrefabInstance: {fileID: 8255757180977891216}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-518826737700850077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8582252243203131141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3f49b1afa8fdb40bf652038bbd8bca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  ID: 2
+  Name: Cup of coffee
+  emptyCupPrefab: {fileID: 1979556813044002912, guid: fb13a4b5a598548408f0bc5bd5ed0d80, type: 3}
+  boostDuration: 10
+  boostedSprintSpeed: 15

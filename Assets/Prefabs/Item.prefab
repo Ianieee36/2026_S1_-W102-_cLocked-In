@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: -1168759825724957610}
   - component: {fileID: -5750005848028013814}
   - component: {fileID: -7981228806794128190}
+  - component: {fileID: 9155398176834962389}
   m_Layer: 5
   m_Name: Item
   m_TagString: Item
@@ -104,6 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685aa58c83bcf5e47b3a50f0b1166864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  minDropDistance: 2
+  maxDropDistance: 3
 --- !u!114 &-1168759825724957610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   ID: 1
+  Name: Phone
 --- !u!212 &-5750005848028013814
 SpriteRenderer:
   serializedVersion: 2
@@ -212,3 +216,16 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.205
+--- !u!114 &9155398176834962389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398603319833870485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72192ac99ed39d041914dcb5719b00ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
+  dropSound: {fileID: 8300000, guid: f5b3cc7047cbcb3458bed5d4590b4e59, type: 3}

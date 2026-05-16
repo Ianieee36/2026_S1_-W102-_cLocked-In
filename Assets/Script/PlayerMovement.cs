@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 moveInput;
     private bool mouseHeld;
 
+    private float originalSprintSpeed;
+    private float boostTimer = 0f;
+    private bool isBoosted = false;
+
     private Light2D pointLight;
     private Vector2 lastDir = Vector2.down;
 
@@ -35,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalSprintSpeed = sprintSpeed;
 
         if (mainCamera == null)
             mainCamera = Camera.main;
@@ -57,12 +62,23 @@ public class PlayerMovement : MonoBehaviour
         {
             pointLight.gameObject.SetActive(!pointLight.gameObject.activeSelf);
         }
+
+        if (isBoosted)
+        {
+            boostTimer -= Time.deltaTime;
+            if (boostTimer <= 0f)
+            {
+                sprintSpeed = originalSprintSpeed;
+                isBoosted = false;
+                Debug.Log("Sprint boost wore off");
+            }
+        }
     }
     void FixedUpdate()
     {
         UpdateLightDirection();
 
-        if (mouseHeld)
+        if (mouseHeld && !ItemDragHandler.isDraggingItem)
             MoveToMouse();
         else
             MoveWithKeyboard();
@@ -133,5 +149,13 @@ public class PlayerMovement : MonoBehaviour
         //subtract 90 degrees for Unity's default orientation of the light
         float angle = Mathf.Atan2(lastDir.y, lastDir.x) * Mathf.Rad2Deg - 90f;
         pointLight.transform.rotation = Quaternion.Euler(0f, 0f, angle);
+    }
+
+    public void ApplySprintBoost(float boostedSpeed, float duration)
+    {
+        sprintSpeed = boostedSpeed;
+        boostTimer = duration;
+        isBoosted = true;
+        Debug.Log("Sprint boost active for " + duration + " seconds");
     }
 }

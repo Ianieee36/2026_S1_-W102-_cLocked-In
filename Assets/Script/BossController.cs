@@ -36,6 +36,14 @@ public class BossController : MonoBehaviour
     private bool alertActive = false; // Whether the alert is currently active
     public DifficultyManager.Difficulty difficulty; // boss difficulty manager
 
+    [Header("Investigation")]
+    public float investigateWaitTime = 5f; //How long the boss looks around for
+    public float investigateSoundRange = 10f; //How far the boss can hear
+    public float lookAroundSpeed = 2f; //How fast he looks around
+    public Vector3 investigatePosition;
+    private float investigateTimer = 0f;
+    private int waypointBeforeInvestigate;
+
     [Header("Chances")]
 
 
@@ -48,7 +56,7 @@ public class BossController : MonoBehaviour
 
     //Rigidbody2D rb; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
 
-    enum BossState { Patrol, Chase }
+    enum BossState { Patrol, Chase, Investigate }
     BossState state;
 
     void Start()
@@ -97,6 +105,10 @@ public class BossController : MonoBehaviour
             case BossState.Chase:
                 Chase();
                 break;
+
+            case BossState.Investigate:
+                Investigate();
+                break;
         }
     }
 
@@ -110,6 +122,57 @@ public class BossController : MonoBehaviour
     //    RotateTowards(dir);
     //}
 
+
+    public void InvestigateSound(Vector3 soundPosition)
+    {
+        Debug.Log("InvestigateSound called, state: " + state + " dist: " + Vector2.Distance(transform.position, soundPosition) + " range: " + investigateSoundRange);
+        if (state == BossState.Chase) return;
+        float dist = Vector2.Distance(transform.position, soundPosition);
+        if (dist > investigateSoundRange) return;
+
+        investigatePosition = soundPosition;
+        waypointBeforeInvestigate = currentWaypoint;
+        investigateTimer = 0f;
+        state = BossState.Investigate;
+        Debug.Log("Boss now investigating at: " + soundPosition);
+    }
+
+    void Investigate()
+    {
+        if (Vector2.Distance(transform.position, investigatePosition) > 0.5f)
+        {
+            agent.speed = moveSpeed;
+            agent.isStopped = false;
+            agent.SetDestination(investigatePosition);
+
+            Vector2 dir = ((Vector2)agent.velocity).normalized;
+            if (dir.sqrMagnitude > 0.01f)
+                RotateTowards(dir);
+        }
+        else
+        {
+            agent.isStopped = true;
+            investigateTimer += Time.deltaTime;
+
+            // Calculate look direction from sine wave
+            float angle = Mathf.Sin(investigateTimer * lookAroundSpeed) * 90f;
+            Vector2 lookDir = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+
+            // Only rotate to that direction if its not facing a wall
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, lookDir, 3f, obstacleMask);
+            if (hit.collider == null)
+            {
+                RotateTowards(lookDir);
+            }
+
+            if (investigateTimer >= investigateWaitTime)
+            {
+                agent.isStopped = false;
+                state = BossState.Patrol;
+                currentWaypoint = waypointBeforeInvestigate;
+            }
+        }
+    }
 
     void Patrol()
     {
@@ -258,7 +321,7 @@ public class BossController : MonoBehaviour
             state = BossState.Chase;
             StartAlert(); // Added alert when boss starts chasing
         }
-        else if (detection <= 0f)
+        else if (detection <= 0f && state != BossState.Investigate)
         {
             state = BossState.Patrol;
             StopAlert(); // Added stop alert when boss goes back to patrolling
