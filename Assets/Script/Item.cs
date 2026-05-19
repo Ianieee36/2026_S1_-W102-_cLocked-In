@@ -5,6 +5,7 @@ public class Item : MonoBehaviour
 {
     public int ID;
     public string Name;
+    public string Description;
 
     public virtual void UseItem()
     {
@@ -16,7 +17,7 @@ public class Item : MonoBehaviour
         Sprite itemIcon = GetComponent<Image>().sprite;
         if(ItemPickupUIController.Instance != null)
         {
-            ItemPickupUIController.Instance.ShowItemPickup(Name, itemIcon);
+            ItemPickupUIController.Instance.ShowItemPickup(Name, Description, itemIcon);
         }
     }
 }

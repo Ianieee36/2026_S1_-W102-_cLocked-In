@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: -5750005848028013814}
   - component: {fileID: -7981228806794128190}
   - component: {fileID: 9155398176834962389}
+  - component: {fileID: -5054997230453937177}
   m_Layer: 5
   m_Name: Item
   m_TagString: Item
@@ -121,6 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ID: 1
   Name: Phone
+  Description: A Phone! It wont turn on though...
 --- !u!212 &-5750005848028013814
 SpriteRenderer:
   serializedVersion: 2
@@ -229,3 +231,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DroppedItem
   dropSound: {fileID: 8300000, guid: f5b3cc7047cbcb3458bed5d4590b4e59, type: 3}
+--- !u!114 &-5054997230453937177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398603319833870485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d582f4df74bc74b488512d586e91bf9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ItemTooltipHandler

@@ -20,6 +20,11 @@ PrefabInstance:
       propertyPath: Name
       value: Empty Cup
       objectReference: {fileID: 0}
+    - target: {fileID: -1168759825724957610, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: Description
+      value: Man...I drank that way too fast. I should've savoured that a bit more.
+        Maybe I can find some more around here?
+      objectReference: {fileID: 0}
     - target: {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
       propertyPath: m_Name
       value: Empty cup variant
