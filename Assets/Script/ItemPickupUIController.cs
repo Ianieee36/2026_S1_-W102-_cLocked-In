@@ -26,10 +26,16 @@ public class ItemPickupUIController : MonoBehaviour
         }
     }
 
-    public void ShowItemPickup(string itemName, Sprite itemIcon)
+    public void ShowItemPickup(string itemName, string itemDescription, Sprite itemIcon)
     {
         GameObject newPopup = Instantiate(popupPrefab, transform);
         newPopup.GetComponentInChildren<TMP_Text>().text = itemName;
+
+        TMP_Text descText = newPopup.transform.Find("ItemDescription")?.GetComponent<TMP_Text>();
+        if(descText != null)
+        {
+            descText.text = itemDescription;
+        }
 
         Image itemImage = newPopup.transform.Find("ItemIcon")?.GetComponent<Image>();
         if(itemImage)

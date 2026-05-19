@@ -140,4 +140,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ID: 5
   Name: Paper
+  Description: Ugh more documents, work is so boring, all this has on it are some
+    numbers from last weeks quarterly report. Maybe I can turn this into something?
   paperAirplanePrefab: {fileID: 7838493255297817660, guid: be231d42f97558b42af9f27558d7999a, type: 3}
