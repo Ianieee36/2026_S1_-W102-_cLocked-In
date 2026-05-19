@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3265c6edef679114dbd429c4347663eb, type: 3}
-  m_Name: Peter
+  m_Name: Karen
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
-  npcName: Peter Griffin
-  npcPortrait: {fileID: 21300000, guid: 0f938ef1ed821d54aa9f3f0f696d8957, type: 3}
+  npcName: Karen Smith
+  npcPortrait: {fileID: 21300000, guid: 690c8f9ca4eb0d946a2580f72060a55b, type: 3}
   dialogueLines:
-  - Hey I'm Peter Griffin
-  - This is my corner
+  - I'm so tired...
+  - Hey could you get me a latte?
+  - Thanks...
   typingSpeed: 0.05
-  voiceSound: {fileID: 8300000, guid: 9d6d961bf0dde5f47b311b708597fcbd, type: 3}
+  voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 0100
+  autoProgressLines: 010100
   autoProgressDelay: 2
