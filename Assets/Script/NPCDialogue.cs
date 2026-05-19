@@ -9,9 +9,27 @@ public class NPCDialogue : ScriptableObject
     public string npcName;
     public Sprite npcPortrait;
     public string[] dialogueLines;
+    
     public float typingSpeed = 0.05f;
     public AudioClip voiceSound;
     public float voicePitch = 1f;
     public bool[] autoProgressLines;
+    public bool[] endDialogueLines; // Mark where dialogue ends
     public float autoProgressDelay = 2f;
+
+    public DialogueChoice[] choices;
+
+    public int questInProgressIndex; // What does he say while quest in progress
+    public int questCompletedIndex; // What does he say when quest completed
+    public Quest quest; // Quest NPC gives
+}
+
+[System.Serializable] 
+
+public class DialogueChoice
+{    
+    public int dialogueIndex; // Dialogue line where choices appear
+    public string[] choices; // Player response options
+    public int[] nextDialogueIndexes; // where choice leads
+    public bool[] givesQuest; // if choice gives quest
 }

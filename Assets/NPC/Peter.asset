@@ -15,10 +15,27 @@ MonoBehaviour:
   npcName: Peter Griffin
   npcPortrait: {fileID: 21300000, guid: 0f938ef1ed821d54aa9f3f0f696d8957, type: 3}
   dialogueLines:
-  - Hey I'm Peter Griffin
-  - This is my corner
-  typingSpeed: 0.05
+  - Hey, I'm Peter Griffin
+  - I kinda need something
+  - I need a red pen
+  - Thank you so much!
+  - That's fine i'll get it myself
+  - I really need that red pen
+  - I'm glad you find one
+  - Thanks!
+  typingSpeed: 0.06
   voiceSound: {fileID: 8300000, guid: 9d6d961bf0dde5f47b311b708597fcbd, type: 3}
   voicePitch: 1
-  autoProgressLines: 0100
+  autoProgressLines: 0100000000000100
+  endDialogueLines: 0000000101010001
   autoProgressDelay: 2
+  choices:
+  - dialogueIndex: 2
+    choices:
+    - Okay. i'll get one for you
+    - I got something to do
+    nextDialogueIndexes: 0300000004000000
+    givesQuest: 0100
+  questInProgressIndex: 5
+  questCompletedIndex: 6
+  quest: {fileID: 11400000, guid: a083781b629a048ea94100a872be8f9c, type: 2}

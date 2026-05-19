@@ -15,11 +15,27 @@ MonoBehaviour:
   npcName: Karen Smith
   npcPortrait: {fileID: 21300000, guid: 690c8f9ca4eb0d946a2580f72060a55b, type: 3}
   dialogueLines:
+  - Hi, I am Karen Walt
   - I'm so tired...
-  - Hey could you get me a latte?
-  - Thanks...
+  - Do you mind getting me a cup of coffee?
+  - Thanks! Appreciate it
+  - Oh... ok... Maybe next time
+  - Where's my coffee?
+  - 'Thank you so much! '
+  - I can do everything now.
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 010100
+  autoProgressLines: 0100000000000100
+  endDialogueLines: 0000000101010001
   autoProgressDelay: 2
+  choices:
+  - dialogueIndex: 2
+    choices:
+    - No, I don't mind
+    - I'm quite busy right now
+    nextDialogueIndexes: 0300000004000000
+    givesQuest: 0100
+  questInProgressIndex: 5
+  questCompletedIndex: 6
+  quest: {fileID: 11400000, guid: 8a57ca0413c60417ea20a0e84ef42730, type: 2}
