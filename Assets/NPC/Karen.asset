@@ -22,4 +22,4 @@ MonoBehaviour:
   voiceSound: {fileID: 0}
   voicePitch: 1
   autoProgressLines: 010100
-  autoProgressDelay: 2
+  autoProgressDelay: 1
