@@ -20,6 +20,11 @@ PrefabInstance:
       propertyPath: Name
       value: Paper Plane
       objectReference: {fileID: 0}
+    - target: {fileID: -1168759825724957610, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: Description
+      value: Aha! If it wasnt for my time spent making paper airplanes in primary,
+        I probably would've made the worlds worst paper airplane.
+      objectReference: {fileID: 0}
     - target: {fileID: 398603319833870485, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
       propertyPath: m_Name
       value: Paper Plane Variant

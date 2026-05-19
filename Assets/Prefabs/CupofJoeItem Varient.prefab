@@ -144,6 +144,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ID: 2
   Name: Cup of coffee
+  Description: Mmm... Finally a damn good cup of coffee. Needed a pick me up. What
+    a drag.
   emptyCupPrefab: {fileID: 1979556813044002912, guid: fb13a4b5a598548408f0bc5bd5ed0d80, type: 3}
   boostDuration: 10
   boostedSprintSpeed: 15
