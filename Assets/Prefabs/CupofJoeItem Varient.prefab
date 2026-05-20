@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1098600780904815229, guid: bdaef637b8eb274488ae1ecc050b7bd8, type: 3}
+    - target: {fileID: -5750005848028013814, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: -1168759825724957610, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
       propertyPath: ID
       value: 2
@@ -144,6 +148,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ID: 2
   Name: Cup of coffee
+  quantity: 1
   Description: Mmm... Finally a damn good cup of coffee. Needed a pick me up. What
     a drag.
   emptyCupPrefab: {fileID: 1979556813044002912, guid: fb13a4b5a598548408f0bc5bd5ed0d80, type: 3}

@@ -31,7 +31,9 @@ public class SaveController : MonoBehaviour
             playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position,
             bossPosition = GameObject.FindGameObjectWithTag("BossCharacter").transform.position,
             inventorySaveData = inventoryController.GetInventoryItems(),
-            hotbarSaveData = hotbarController.GetHotbarItems()
+            hotbarSaveData = hotbarController.GetHotbarItems(),
+            questProgressData = QuestController.Instance.activateQuests,
+            handInQuestIDs = QuestController.Instance.handInQuestIDs
     };
         File.WriteAllText(saveLocation, JsonUtility.ToJson(saveData));
     }
@@ -46,6 +48,9 @@ public class SaveController : MonoBehaviour
 
             inventoryController.SetInventoryItems(saveData.inventorySaveData);
             hotbarController.SetHotbarItems(saveData.hotbarSaveData);
+
+            QuestController.Instance.LoadQuestProgress(saveData.questProgressData);
+            QuestController.Instance.handInQuestIDs = saveData.handInQuestIDs;
 
         } else
         {

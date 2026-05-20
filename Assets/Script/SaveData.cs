@@ -8,4 +8,6 @@ public class SaveData
     public Vector3 bossPosition;
     public List<InventorySaveData> inventorySaveData;
     public List<InventorySaveData> hotbarSaveData;
+    public List<QuestProgress> questProgressData;
+    public List<string> handInQuestIDs;
 }

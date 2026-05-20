@@ -25,27 +25,34 @@ public class QuestUI : MonoBehaviour
     }
 
     public void UpdateQuestUI()
+{
+    foreach (Transform child in questListContent)
     {
-        foreach(Transform child in questListContent)
+        Destroy(child.gameObject);
+    }
+
+    if (QuestController.Instance == null)
+    {
+        Debug.LogError("QuestController.Instance is missing. Quest UI cannot update.");
+        return;
+    }
+
+    foreach (var quest in QuestController.Instance.activateQuests)
+    {
+        GameObject entry = Instantiate(questEntryPrefab, questListContent);
+
+        TMP_Text questNameText = entry.transform.Find("QuestName").GetComponent<TMP_Text>();
+        Transform objectiveList = entry.transform.Find("ObjectiveList");
+
+        questNameText.text = quest.quest.name;
+
+        foreach (var objective in quest.objectives)
         {
-            Destroy(child.gameObject);
-        }
+            GameObject objTextGO = Instantiate(objectiveTextPrefab, objectiveList);
+            TMP_Text objText = objTextGO.GetComponent<TMP_Text>();
 
-        // Build quest entries
-        foreach(var quest in QuestController.Instance.activateQuests)
-        {
-            GameObject entry = Instantiate(questEntryPrefab, questListContent);
-            TMP_Text questNameText = entry.transform.Find("QuestName").GetComponent<TMP_Text>();
-            Transform objectiveList = entry.transform.Find("ObjectiveList");
-
-            questNameText.text = quest.quest.name;
-
-            foreach(var objective in quest.objectives)
-            {
-                GameObject objTextGO = Instantiate(objectiveTextPrefab, objectiveList);
-                TMP_Text objText = objTextGO.GetComponent<TMP_Text>();
-                objText.text = $"{objective.description} ({objective.currentAmount}/{objective.requiredAmount})"; // 
-            }
+            objText.text = $"{objective.description} ({objective.currentAmount}/{objective.requiredAmount})";
         }
     }
+}
 }
