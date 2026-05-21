@@ -340,9 +340,11 @@ public class BossController : MonoBehaviour
 
     bool CanSeePlayer()
     {
-        // Check if player is within vision cone and not blocked by obstacles
-        Vector2 dir = (player.position - transform.position).normalized;
+        // If player is hiding boss can never see them
+        if (PlayerHiding.Instance != null && PlayerHiding.Instance.IsHiding())
+            return false;
 
+        Vector2 dir = (player.position - transform.position).normalized;
         float angle = Vector2.Angle(VisionPivot.right, dir);
         if (angle > visionAngle / 2f) return false;
 
@@ -350,7 +352,6 @@ public class BossController : MonoBehaviour
         if (dist > visionRange) return false;
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, dir, visionRange);
-
         if (hit.collider != null)
         {
             if (hit.transform != player && ((1 << hit.collider.gameObject.layer) & obstacleMask) != 0)
@@ -358,8 +359,7 @@ public class BossController : MonoBehaviour
         }
 
         return true;
-
-}
+    }
 
     void RotateTowards(Vector2 dir)
     {
