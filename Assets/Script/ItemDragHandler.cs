@@ -167,19 +167,46 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
 
     void DropItemAtMouse(Slot originalSlot, Vector2 mouseScreenPosition)
     {
-        originalSlot.currentItem = null;
+        Item item = GetComponent<Item>();
 
         Camera mainCamera = Camera.main;
-        if (mainCamera == null) return;
+        if(mainCamera == null) return;
 
         Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(
-            new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Mathf.Abs(mainCamera.transform.position.z))
+            new Vector3(
+                mouseScreenPosition.x,
+                mouseScreenPosition.y,
+                Mathf.Abs(mainCamera.transform.position.z)
+            )
         );
 
         Vector2 dropPosition = new Vector2(mouseWorldPosition.x, mouseWorldPosition.y);
 
-        Instantiate(gameObject, dropPosition, Quaternion.identity);
-        Destroy(gameObject);
+        // Drop only 1 item
+        GameObject droppedObject = Instantiate(gameObject, dropPosition, Quaternion.identity);
+
+        Item droppedItem = droppedObject.GetComponent<Item>();
+        droppedItem.quantity = 1;
+        droppedItem.UpdateQuantityDisplay();
+
+        // Remove only 1 from stack 
+        item.RemoveFromStack(1);
+
+        // If stack empty remove ui item
+        if(item.quantity <= 0)
+        {
+            originalSlot.currentItem = null;
+            Destroy(gameObject);
+        }
+        else
+        {
+            item.UpdateQuantityDisplay();
+
+            transform.SetParent(originalParent);
+            GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        }
+
+        InventoryController.Instance.RebuildItemCounts();
     }
 
     public void OnPointerClick(PointerEventData eventData)
