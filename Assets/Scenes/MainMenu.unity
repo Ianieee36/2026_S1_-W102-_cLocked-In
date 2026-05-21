@@ -685,16 +685,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1117953953}
-        m_TargetAssemblyTypeName: SettingsButton, Assembly-CSharp
+      - m_Target: {fileID: 1117953954}
+        m_TargetAssemblyTypeName: GeneralMainMenuButtons, Assembly-CSharp
         m_MethodName: OnPlayClicked
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: PlayerSettings
+          m_StringArgument: AudioMenu
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 196147879}
@@ -1184,16 +1184,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1117953951}
-        m_TargetAssemblyTypeName: PlayButton, Assembly-CSharp
+      - m_Target: {fileID: 1117953954}
+        m_TargetAssemblyTypeName: GeneralMainMenuButtons, Assembly-CSharp
         m_MethodName: OnPlayClicked
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: GameSettingsMenu
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 196147879}
@@ -1291,9 +1291,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1117953952}
-  - component: {fileID: 1117953951}
-  - component: {fileID: 1117953953}
   - component: {fileID: 1117953954}
+  - component: {fileID: 1117953953}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1301,24 +1300,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1117953951
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1117953950}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2612b3c6a201def47810c082b1de6a6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayButton
-  leftDoor: {fileID: 992370173}
-  rightDoor: {fileID: 1774904726}
-  openDistance: 275
-  openDuration: 1.5
-  sceneTransition: {fileID: 1117953954}
-  sceneName: GameSettingsMenu
 --- !u!4 &1117953952
 Transform:
   m_ObjectHideFlags: 0
@@ -1343,15 +1324,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117953950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ac1d47270a715246a9079092c952fb6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6506fe8b36ab3f44cb2e4b2c0991c731, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SettingsButton
-  leftDoor: {fileID: 992370173}
-  rightDoor: {fileID: 1774904726}
-  openDistance: 275
-  openDuration: 1.5
-  sceneTransition: {fileID: 1117953954}
-  sceneName: AudioMenu
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralSceneTransition
+  fadePanel: {fileID: 184568603}
+  fadeDuration: 1.5
 --- !u!114 &1117953954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,12 +1338,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1117953950}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 134029d33853f9f4b9af91ade45f9677, type: 3}
+  m_Script: {fileID: 11500000, guid: 76190023ac69945e195285d8f6a10a2d, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneTransition
-  fadePanel: {fileID: 184568603}
-  elevatorOpenDelay: 0
-  fadeDuration: 2.5
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralMainMenuButtons
+  leftDoor: {fileID: 992370173}
+  rightDoor: {fileID: 1774904726}
+  openDistance: 275
+  openDuration: 1.5
+  generalSceneTransition: {fileID: 1117953953}
 --- !u!1 &1182657897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2412,7 +2391,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 1610622481}
   - {fileID: 124458236}
-  - {fileID: 1117953952}
   - {fileID: 199036621}
   - {fileID: 895186124}
   - {fileID: 196147880}
+  - {fileID: 1117953952}

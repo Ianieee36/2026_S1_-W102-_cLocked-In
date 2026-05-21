@@ -3,7 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class GameSettingsButton : MonoBehaviour
 {   
-    public GeneralSceneTransition sceneTransition; // transition scene
+    public GeneralSceneTransition generalSceneTransition; // transition scene
+    private SaveController saveController;
 
     // CEO Difficulty
     public void SelectCEO()
@@ -24,13 +25,26 @@ public class GameSettingsButton : MonoBehaviour
     }
 
     // New Game Scene Load
-    public void NewGame()
+    public void NewGame(string sceneName)
     {
-        if (sceneTransition == null)
+        if (generalSceneTransition == null)
         {
             Debug.LogError("Scene Transition is not assigned in GameSettingsButton.");
             return;
         }
-        sceneTransition.GoToScene("Main");
+        generalSceneTransition.LoadSceneWithFade(sceneName);
+    }
+
+    public void ContinueGame(string sceneName)
+    {
+        if (generalSceneTransition == null)
+        {
+            Debug.LogError("Scene Transition is not assigned in GameSettingsButton.");
+            return;
+        }
+        
+        generalSceneTransition.LoadSceneWithFade(sceneName);
+        saveController.LoadGame();
+        
     }
 }

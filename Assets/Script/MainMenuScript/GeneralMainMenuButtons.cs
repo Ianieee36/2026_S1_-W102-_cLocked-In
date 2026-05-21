@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayButton : MonoBehaviour
+public class GeneralMainMenuButtons : MonoBehaviour
 {
     public Transform leftDoor; // Reference to the left door transform
     public Transform rightDoor; // Reference to the right door transform
@@ -9,19 +9,18 @@ public class PlayButton : MonoBehaviour
     public float openDistance = 50f; // Distance the doors will move when opening
     public float openDuration = 2.5f; // Duration of the door opening animation
 
-    public SceneTransition sceneTransition; // Reference to the SceneTransition script to handle scene changes
-    public string sceneName = "GameSettingsMenu";  // Name of the scene to load when the play button is clicked
+    public GeneralSceneTransition generalSceneTransition; // Reference to the SceneTransition script to handle scene changes
 
     private bool hasClicked = false;
 
-    public void OnPlayClicked() // Method called when the play button is clicked
+    public void OnPlayClicked(string sceneName) // Method called when the play button is clicked
     {
         if (hasClicked) return;
 
         hasClicked = true;
 
         StartCoroutine(OpenDoors());
-        sceneTransition.StartTransition(sceneName);
+        generalSceneTransition.LoadSceneWithFade(sceneName);
     }
 
     IEnumerator OpenDoors() // Coroutine to animate the doors opening

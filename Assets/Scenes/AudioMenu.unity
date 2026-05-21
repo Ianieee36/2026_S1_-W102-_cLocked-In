@@ -279,7 +279,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2108964073}
         m_TargetAssemblyTypeName: GeneralSceneTransition, Assembly-CSharp
-        m_MethodName: GoToScene
+        m_MethodName: LoadSceneWithFade
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3303,7 +3303,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2108964073}
         m_TargetAssemblyTypeName: GeneralSceneTransition, Assembly-CSharp
-        m_MethodName: GoToScene
+        m_MethodName: LoadSceneWithFade
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4302,6 +4302,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1354315018}
   - {fileID: 2105837016}
-  - {fileID: 2108964070}
   - {fileID: 1454786161}
   - {fileID: 406312662}
+  - {fileID: 2108964070}
