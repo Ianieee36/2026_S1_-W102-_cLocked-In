@@ -29,21 +29,41 @@ public class SnakeGame : MonoBehaviour
     private int score = 0;
     private bool isRunning = false;
     private bool taskCompleted = false;
+    private int taskCompletedOnDay = -1; //-1 means not completed yet
 
     private Dictionary<Vector2Int, GameObject> cellObjects = new Dictionary<Vector2Int, GameObject>();
 
+    public bool IsTaskCompleted()
+    {
+        return taskCompletedOnDay == DayManager.Instance.currentDay;
+    }
     void OnEnable()
     {
+        if (DayManager.Instance != null && taskCompletedOnDay == DayManager.Instance.currentDay)
+        {
+            // Already completed today, show message instead
+            ClearBoard();
+            scoreText.text = "Task Complete!";
+            statusText.text = "You already completed today's task. Come back tomorrow!";
+            return;
+        }
         // Reset game when computer screen opens
         ResetGame();
     }
 
     void Update()
     {
+        // Block input if already completed today
+        if (DayManager.Instance != null && taskCompletedOnDay == DayManager.Instance.currentDay)
+            return;
+
         if (!isRunning)
         {
             if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
+            {
+                ResetGame();
                 StartCoroutine(RunGame());
+            }
             return;
         }
 
@@ -171,9 +191,30 @@ public class SnakeGame : MonoBehaviour
         GameObject cell = Instantiate(cellPrefab, gameArea);
         RectTransform rt = cell.GetComponent<RectTransform>();
         rt.sizeDelta = new Vector2(cellSize, cellSize);
-        rt.anchoredPosition = new Vector2(pos.x * cellSize, pos.y * cellSize);
+
+        // Offset so grid is centered in GameArea
+        float offsetX = -(gridWidth * cellSize) / 2f;
+        float offsetY = -(gridHeight * cellSize) / 2f;
+        rt.anchoredPosition = new Vector2(pos.x * cellSize + offsetX, pos.y * cellSize + offsetY);
+
         cell.GetComponent<Image>().color = color;
         cellObjects[pos] = cell;
+    }
+
+    void DrawBorder()
+    {
+        // Bottom and Top
+        for (int x = -1; x <= gridWidth; x++)
+        {
+            DrawCell(new Vector2Int(x, -1), Color.black);
+            DrawCell(new Vector2Int(x, gridHeight), Color.black);
+        }
+        // Left and Right
+        for (int y = 0; y <= gridHeight; y++)
+        {
+            DrawCell(new Vector2Int(-1, y), Color.black);
+            DrawCell(new Vector2Int(gridWidth, y), Color.black);
+        }
     }
 
     void RemoveCell(Vector2Int pos)
@@ -190,15 +231,18 @@ public class SnakeGame : MonoBehaviour
         isRunning = false;
         statusText.text = "Game Over! Press any key to retry.";
         ClearBoard();
+        StopAllCoroutines(); //Stops here instead
     }
 
     void Win()
     {
         isRunning = false;
         taskCompleted = true;
+        taskCompletedOnDay = DayManager.Instance != null ? DayManager.Instance.currentDay : -1;
         statusText.text = "Task Complete! Well done!";
         ClearBoard();
         Debug.Log("Daily task completed!");
+        StopAllCoroutines();
     }
 
     void ClearBoard()
@@ -210,7 +254,9 @@ public class SnakeGame : MonoBehaviour
 
     void ResetGame()
     {
-        StopAllCoroutines();
+        // Don't reset if already completed today
+        if (DayManager.Instance != null && taskCompletedOnDay == DayManager.Instance.currentDay)
+            return;
         isRunning = false;
         taskCompleted = false;
         score = 0;
@@ -219,12 +265,11 @@ public class SnakeGame : MonoBehaviour
 
         ClearBoard();
 
-        // Scale score requirement with day
         if (DayManager.Instance != null)
+        {
             scoreToWin = DayManager.Instance.currentDay * 5;
             moveInterval = Mathf.Max(0.05f, 0.2f - (DayManager.Instance.currentDay * 0.02f));
-
-        // Spawn snake in the middle
+        }
         snake.Clear();
         snake.Add(new Vector2Int(gridWidth / 2, gridHeight / 2));
 
@@ -233,5 +278,12 @@ public class SnakeGame : MonoBehaviour
 
         SpawnFood();
         DrawSnake();
+        DrawBorder();
+    }
+
+    public void ResetTaskCompletion()
+    {
+        taskCompletedOnDay = -1;
+        taskCompleted = false;
     }
 }

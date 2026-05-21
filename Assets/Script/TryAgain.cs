@@ -10,7 +10,7 @@ public class TryAgain : MonoBehaviour
 
     [Header("Boss")]
     public BossController boss;
-
+    
     [Header("Chances")]
     public int maxChances = 3;
     private int currentChances;
@@ -54,25 +54,26 @@ public class TryAgain : MonoBehaviour
     }
 
     public void PlayAgain()
-    {   
+    {
         isCaught = false;
-        
         Time.timeScale = 1f;
+
+        if (DayManager.Instance != null)
+        {
+            DayManager.Instance.currentTime = 0f;
+            DayManager.Instance.endOfDayTriggered = false;
+        }
+
+        SnakeGame snakeGame = FindObjectOfType<SnakeGame>(true);
+        if (snakeGame != null)
+            snakeGame.ResetTaskCompletion();
 
         if (caughtPanel != null)
             caughtPanel.SetActive(false);
-        else
-            Debug.LogError("Caught Panel is not assigned.");
-
         if (boss != null)
             boss.ResetAfterCaught();
-        else
-            Debug.LogError("Boss is not assigned.");
-
         if (SaveController.Instance != null)
             SaveController.Instance.LoadGame();
-        else
-            Debug.LogError("SaveController Instance is missing.");
     }
 
     void UpdateChancesText()
