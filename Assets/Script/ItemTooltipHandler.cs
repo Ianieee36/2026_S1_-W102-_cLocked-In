@@ -15,7 +15,8 @@ public class ItemTooltipHandler : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(item != null && TooltipController.Instance != null)
+        Debug.Log("Hovering over: " + (item != null ? item.Name : "null item") + " desc: " + (item != null ? item.Description : "null desc"));
+        if (item != null && TooltipController.Instance != null)
             TooltipController.Instance.ShowTooltip(item.Name, item.Description, itemImage.sprite);
     }
 

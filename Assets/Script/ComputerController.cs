@@ -22,10 +22,15 @@ public class ComputerController : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log("Computer Interact called");
         isOpen = !isOpen;
-        Debug.Log("screenUI is: " + screenUI);
         screenUI.SetActive(isOpen);
+
+        if (PlayerHiding.Instance != null)
+        {
+            PlayerMovement playerMovement = PlayerHiding.Instance.GetComponent<PlayerMovement>();
+            if (playerMovement != null)
+                playerMovement.enabled = !isOpen;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
