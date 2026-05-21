@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3265c6edef679114dbd429c4347663eb, type: 3}
-  m_Name: Stewie Griffin
+  m_Name: Matty Luriz
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
-  npcName: Stewie Griffin
-  npcPortrait: {fileID: 2324835092603669600, guid: f353a623ba826354ba3611adfcc68ab4, type: 3}
+  npcName: Matty Luriz
+  npcPortrait: {fileID: 8766521031526211517, guid: 98c23968082fec847be3dc640c08c1ac, type: 3}
   dialogueLines:
-  - I asked Peter for Paper clips yesterday.
-  - That fat man didn't give me any.
-  - I need to get organized soon.
+  - '*gagging into the bin*'
+  - Oh go-*gags* that pizza was so spoiled.
+  - 'Could yo-*gag* get me a cup of *gag* water. '
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 010100
+  autoProgressLines: 
   endDialogueLines: 
   autoProgressDelay: 2
   choices: []

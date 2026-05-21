@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f353a623ba826354ba3611adfcc68ab4
+guid: 98c23968082fec847be3dc640c08c1ac
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2324835092603669600
-    second: Stewie Griffin_0
+      213: 8766521031526211517
+    second: Matty Luriz_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -73,7 +73,7 @@ TextureImporter:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
-    resizeAlgorithm: 1
+    resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 0
     compressionQuality: 50
@@ -100,7 +100,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Stewie Griffin_0
+      name: Matty Luriz_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06c01000339734020800000000000000
-      internalID: 2324835092603669600
+      spriteID: dbf5c106e60f8a970800000000000000
+      internalID: 8766521031526211517
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Stewie Griffin_0: 2324835092603669600
+      Matty Luriz_0: 8766521031526211517
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
