@@ -10,18 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3265c6edef679114dbd429c4347663eb, type: 3}
-  m_Name: Stewie Griffin
+  m_Name: John Severance
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
-  npcName: Stewie Griffin
-  npcPortrait: {fileID: 2324835092603669600, guid: f353a623ba826354ba3611adfcc68ab4, type: 3}
+  npcName: John Severance
+  npcPortrait: {fileID: 7197723613690766259, guid: d5cc6c9bd42ae864695d837bdd3f3a98, type: 3}
   dialogueLines:
-  - I asked Peter for Paper clips yesterday.
-  - That fat man didn't give me any.
-  - I need to get organized soon.
+  - Hello, I'm John
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 010100
+  autoProgressLines: 
   endDialogueLines: 
   autoProgressDelay: 2
   choices: []

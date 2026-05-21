@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3265c6edef679114dbd429c4347663eb, type: 3}
-  m_Name: Stewie Griffin
+  m_Name: Susan Jones
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
-  npcName: Stewie Griffin
-  npcPortrait: {fileID: 2324835092603669600, guid: f353a623ba826354ba3611adfcc68ab4, type: 3}
+  npcName: Susan Jones
+  npcPortrait: {fileID: 2413221731224825401, guid: 00d3c9ba31e691c4098215f53571a644, type: 3}
   dialogueLines:
-  - I asked Peter for Paper clips yesterday.
-  - That fat man didn't give me any.
-  - I need to get organized soon.
+  - SLAAAYY QUEEEN.
+  - hold on Sherry, someone wants a word.
+  - You need anything?
+  - if not then you can like go away.
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 010100
+  autoProgressLines: 0000
   endDialogueLines: 
   autoProgressDelay: 2
   choices: []
