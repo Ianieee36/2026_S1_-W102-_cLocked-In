@@ -1443,7 +1443,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2120789153}
         m_TargetAssemblyTypeName: GeneralSceneTransition, Assembly-CSharp
-        m_MethodName: GoToScene
+        m_MethodName: LoadSceneWithFade
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2710,7 +2710,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2120789153}
         m_TargetAssemblyTypeName: GeneralSceneTransition, Assembly-CSharp
-        m_MethodName: GoToScene
+        m_MethodName: LoadSceneWithFade
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3431,8 +3431,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2120789150}
-  - component: {fileID: 2120789149}
-  - component: {fileID: 2120789151}
   - component: {fileID: 2120789152}
   - component: {fileID: 2120789153}
   - component: {fileID: 2120789154}
@@ -3443,18 +3441,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2120789149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120789148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01533aeba27bacf439dd8191cf29e8d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BackButton
 --- !u!4 &2120789150
 Transform:
   m_ObjectHideFlags: 0
@@ -3470,18 +3456,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2120789151
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2120789148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d09c7b5471fe5b043860ceb7035c74e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BackToAudioSettings
 --- !u!114 &2120789152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3691,5 +3665,5 @@ SceneRoots:
   m_Roots:
   - {fileID: 436333576}
   - {fileID: 1763376342}
-  - {fileID: 2120789150}
   - {fileID: 1089245339}
+  - {fileID: 2120789150}

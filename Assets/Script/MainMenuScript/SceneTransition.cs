@@ -8,6 +8,7 @@ public class SceneTransition : MonoBehaviour
     public Image fadePanel; // Reference to the UI Image used for fading effect
     public float elevatorOpenDelay = 2f; // Time to wait for the elevator opening animation/sound before starting the fade
     public float fadeDuration = 1.5f; // Duration of the fade to black effect
+    public GeneralSceneTransition generalSceneTransition;
 
     public void StartTransition(string sceneName) // Method to initiate the scene transition process
     {

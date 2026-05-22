@@ -6,40 +6,31 @@ using UnityEngine.UI;
 public class GeneralSceneTransition : MonoBehaviour
 {
     public Image fadePanel;
-    public float fadeDuration = 1f;
+    public float fadeDuration = 1.5f;
 
-    private bool isTransitioning = false;
-
-    private void Start()
+    public void LoadSceneWithFade(string sceneName)
     {
-        Color c = fadePanel.color;
-        c.a = 0f;
-        fadePanel.color = c;
-    }
-
-    public void GoToScene(string sceneName)
-    {
-        if (isTransitioning) return;
+        Time.timeScale = 1f;
         StartCoroutine(FadeAndLoad(sceneName));
     }
 
     private IEnumerator FadeAndLoad(string sceneName)
     {
-        isTransitioning = true;
-
         float timer = 0f;
-        Color c = fadePanel.color;
+        Color color = fadePanel.color;
+        color.a = 0f;
+        fadePanel.color = color;
 
         while (timer < fadeDuration)
         {
-            timer += Time.deltaTime;
-            c.a = Mathf.Lerp(0f, 1f, timer / fadeDuration);
-            fadePanel.color = c;
+            timer += Time.unscaledDeltaTime;
+            color.a = Mathf.Lerp(0f, 1f, timer / fadeDuration);
+            fadePanel.color = color;
             yield return null;
         }
 
-        c.a = 1f;
-        fadePanel.color = c;
+        color.a = 1f;
+        fadePanel.color = color;
 
         SceneManager.LoadScene(sceneName);
     }
