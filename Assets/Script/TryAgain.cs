@@ -5,6 +5,9 @@ public class TryAgain : MonoBehaviour
 {
     public static TryAgain Instance;
 
+    [Header("Game Over")]
+    public GameObject gameOverPanel;
+
     [Header("Caught UI")]
     public GameObject caughtPanel;
 
@@ -12,8 +15,8 @@ public class TryAgain : MonoBehaviour
     public BossController boss;
     
     [Header("Chances")]
+    public int warningIndex = 0;
     public int maxChances = 3;
-    private int currentChances;
     private bool isCaught = false;
     public TextMeshProUGUI chancesText;
 
@@ -24,39 +27,73 @@ public class TryAgain : MonoBehaviour
 
     private void Start()
     {
-        currentChances = maxChances;
+        warningIndex = 0;
 
         Time.timeScale = 1f;
 
-        if(caughtPanel != null)
+        if (caughtPanel != null)
         {
             caughtPanel.SetActive(false);
         }
 
-        UpdateChancesText();
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.SetActive(false);
+        }
+
+        UpdateWarningText();
     }
 
     public void PlayerCaught()
     {
-        if(isCaught) return;
+        if (isCaught) return;
 
         isCaught = true;
-        currentChances--;
+
+        warningIndex++;
 
         Time.timeScale = 0f;
 
-        if(caughtPanel != null)
-        {
-            caughtPanel.SetActive(true);
-        }
+        UpdateWarningText();
 
-        UpdateChancesText();
+        // REACHED MAX WARNINGS
+        if (warningIndex >= maxChances)
+        {
+            if (caughtPanel != null)
+            {
+                caughtPanel.SetActive(false);
+            }
+
+            if (gameOverPanel != null)
+            {
+                gameOverPanel.SetActive(true);
+            }
+        }
+        else
+        {
+            if (caughtPanel != null)
+            {
+                caughtPanel.SetActive(true);
+            }
+        }
     }
 
     public void PlayAgain()
     {
+        if (warningIndex >= maxChances)
+        {
+            Debug.Log("You're Fired.");
+            return;
+        }
+
         isCaught = false;
         Time.timeScale = 1f;
+
+        if (caughtPanel != null)
+            caughtPanel.SetActive(false);
+
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
 
         if (DayManager.Instance != null)
         {
@@ -68,19 +105,40 @@ public class TryAgain : MonoBehaviour
         if (snakeGame != null)
             snakeGame.ResetTaskCompletion();
 
-        if (caughtPanel != null)
-            caughtPanel.SetActive(false);
         if (boss != null)
             boss.ResetAfterCaught();
+
         if (SaveController.Instance != null)
             SaveController.Instance.LoadGame();
+        else
+            Debug.LogError("SaveController Instance is missing.");
     }
 
-    void UpdateChancesText()
+   void UpdateWarningText()
     {
-        if(chancesText != null)
+        if (chancesText == null) return;
+
+        string warningMessage = "";
+
+        switch (warningIndex)
         {
-            chancesText.text = "Chances left: " + currentChances;
+            case 1:
+                warningMessage = "This is your 1st warning.";
+                break;
+
+            case 2:
+                warningMessage = "This is your 2nd warning.";
+                break;
+
+            case 3:
+                warningMessage = "This is your final warning.";
+                break;
+
+            default:
+                warningMessage = "";
+                break;
         }
+
+        chancesText.text = warningMessage;
     }
 }

@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3265c6edef679114dbd429c4347663eb, type: 3}
   m_Name: Explosive Salad
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
-  npcName: Karen Smith
+  npcName: Explosive Salad
   npcPortrait: {fileID: 21300000, guid: 690c8f9ca4eb0d946a2580f72060a55b, type: 3}
   dialogueLines:
-  - Hi, I am Karen Walt
+  - Hi, I am Explosive Salad
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
   autoProgressLines: 
+  endDialogueLines: 
   autoProgressDelay: 2
+  choices: []
+  questInProgressIndex: 0
+  questCompletedIndex: 0
+  quest: {fileID: 0}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Jayden Marsh
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   npcName: Jayden Marsh
-  npcPortrait: {fileID: 1664984640365527982, guid: 50158b15dcadd8f40befe17cb5cf7a3c, type: 3}
+  npcPortrait: {fileID: 21300000, guid: 50158b15dcadd8f40befe17cb5cf7a3c, type: 3}
   dialogueLines:
   - Hey my eyes are up here!
   - Have you seen my shirt anywhere?

@@ -15,14 +15,25 @@ MonoBehaviour:
   npcName: Chris Cantos
   npcPortrait: {fileID: 21300000, guid: 032d330b812c41d44ac6a0771f7f9000, type: 3}
   dialogueLines:
-  - 
+  - Hey, you look less dead inside than the rest of us
+  - Can you grab me a coffee before i become an unpaid ghost employee?
+  - You're a hero. Or at least middle-management material.
+  - 'Wow. HR was right about you. '
+  - Please hurry, My soul already submitted its resignation.
+  - Finally... I can hear Excel spreadsheet again.
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 
-  endDialogueLines: 
+  autoProgressLines: 010000000000
+  endDialogueLines: 000001010101
   autoProgressDelay: 2
-  choices: []
-  questInProgressIndex: 0
-  questCompletedIndex: 0
-  quest: {fileID: 0}
+  choices:
+  - dialogueIndex: 2
+    choices:
+    - Fine. One coffee coming up
+    - I respect your suffering, but no.
+    nextDialogueIndexes: 0200000003000000
+    givesQuest: 0100
+  questInProgressIndex: 4
+  questCompletedIndex: 5
+  quest: {fileID: 11400000, guid: ac862042c263243b2964523ff4b6eb49, type: 2}

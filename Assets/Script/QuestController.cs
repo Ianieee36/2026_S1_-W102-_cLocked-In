@@ -34,7 +34,7 @@ public class QuestController : MonoBehaviour
         }
         
 
-        questUI = FindObjectOfType<QuestUI>();
+        RefreshQuestUI();
     }
 
     // Update is called once per frame
@@ -47,6 +47,8 @@ public class QuestController : MonoBehaviour
         activateQuests.Add(new QuestProgress(quest));
 
         CheckInventoryForQuests();
+
+        RefreshQuestUI();
 
         if (questUI != null)
             questUI.UpdateQuestUI();
@@ -75,6 +77,8 @@ public class QuestController : MonoBehaviour
                 }
             }
         }
+
+        RefreshQuestUI();
 
         if(questUI != null)
         {
@@ -117,6 +121,8 @@ public class QuestController : MonoBehaviour
         activateQuests.Remove(quest);
 
         Debug.Log("Quest handed in and removed: " + questID);
+
+        RefreshQuestUI();
 
         if (questUI != null)
             questUI.UpdateQuestUI();
@@ -164,11 +170,17 @@ public class QuestController : MonoBehaviour
         return true;
     }
 
+    private void RefreshQuestUI()
+    {
+        questUI = FindObjectOfType<QuestUI>(true);
+    }
     public void LoadQuestProgress(List<QuestProgress> savedQuests)
     {
         activateQuests = savedQuests ?? new();
 
         CheckInventoryForQuests();
+
+        RefreshQuestUI();
 
         if(questUI != null)
         {
