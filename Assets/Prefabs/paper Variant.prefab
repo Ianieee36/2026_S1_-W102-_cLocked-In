@@ -9,9 +9,21 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -5750005848028013814, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: m_Size.x
+      value: 0.57438016
+      objectReference: {fileID: 0}
+    - target: {fileID: -5750005848028013814, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: m_Size.y
+      value: 0.55785125
+      objectReference: {fileID: 0}
+    - target: {fileID: -5750005848028013814, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -8344875110725955150, guid: 246f820e106ce6c4d92c913edd651a8c, type: 3}
+    - target: {fileID: -5750005848028013814, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: -1168759825724957610, guid: 04bd68038ad1a7d4abf04f6ab46d3d30, type: 3}
       propertyPath: ID
       value: 5
@@ -140,6 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   ID: 5
   Name: Paper
+  quantity: 1
   Description: Ugh more documents, work is so boring, all this has on it are some
     numbers from last weeks quarterly report. Maybe I can turn this into something?
   paperAirplanePrefab: {fileID: 7838493255297817660, guid: be231d42f97558b42af9f27558d7999a, type: 3}
