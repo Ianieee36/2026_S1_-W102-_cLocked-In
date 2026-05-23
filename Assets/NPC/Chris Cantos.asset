@@ -28,7 +28,7 @@ MonoBehaviour:
   endDialogueLines: 000001010101
   autoProgressDelay: 2
   choices:
-  - dialogueIndex: 2
+  - dialogueIndex: 1
     choices:
     - Fine. One coffee coming up
     - I respect your suffering, but no.
