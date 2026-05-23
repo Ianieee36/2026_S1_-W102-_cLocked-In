@@ -5,11 +5,14 @@ public class DroppedItem : MonoBehaviour
     public AudioClip dropSound;
     private AudioSource audioSource;
 
-    void Start()
+    void Awake()
     {
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.playOnAwake = false;
+    }
 
+    public void PlayDropEffects()
+    {
         if (dropSound != null)
             audioSource.PlayOneShot(dropSound);
 

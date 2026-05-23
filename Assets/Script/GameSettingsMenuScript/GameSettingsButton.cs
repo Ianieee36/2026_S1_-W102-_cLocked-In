@@ -1,36 +1,44 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameSettingsButton : MonoBehaviour
-{   
-    public GeneralSceneTransition generalSceneTransition; // transition scene
+{
+    public GeneralSceneTransition generalSceneTransition;
 
-    // CEO Difficulty
     public void SelectCEO()
     {
         DifficultyManager.Instance.SetDifficulty(DifficultyManager.Difficulty.CEO);
     }
 
-    // Senior Difficulty
     public void SelectSenior()
     {
         DifficultyManager.Instance.SetDifficulty(DifficultyManager.Difficulty.Senior);
     }
 
-    // Intern Difficulty
     public void SelectIntern()
     {
         DifficultyManager.Instance.SetDifficulty(DifficultyManager.Difficulty.Intern);
     }
 
-    // New Game Scene Load
     public void NewGame(string sceneName)
+    {
+        StartCoroutine(NewGameRoutine(sceneName));
+    }
+
+    private IEnumerator NewGameRoutine(string sceneName)
     {
         if (generalSceneTransition == null)
         {
             Debug.LogError("Scene Transition is not assigned in GameSettingsButton.");
-            return;
+            yield break;
         }
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.StartGameplayMusic();
+            yield return new WaitForSeconds(AudioManager.Instance.fadeDuration);
+        }
+
         generalSceneTransition.LoadSceneWithFade(sceneName);
     }
 }

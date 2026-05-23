@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 using TMPro;
 
 public class TryAgain : MonoBehaviour
@@ -78,6 +80,34 @@ public class TryAgain : MonoBehaviour
         }
     }
 
+   void UpdateWarningText()
+    {
+        if (chancesText == null) return;
+
+        string warningMessage = "";
+
+        switch (warningIndex)
+        {
+            case 1:
+                warningMessage = "This is your 1st warning.";
+                break;
+
+            case 2:
+                warningMessage = "This is your 2nd warning.";
+                break;
+
+            case 3:
+                warningMessage = "This is your final warning.";
+                break;
+
+            default:
+                warningMessage = "";
+                break;
+        }
+
+        chancesText.text = warningMessage;
+    }
+
     public void PlayAgain()
     {
         if (warningIndex >= maxChances)
@@ -114,31 +144,21 @@ public class TryAgain : MonoBehaviour
             Debug.LogError("SaveController Instance is missing.");
     }
 
-   void UpdateWarningText()
+    public void ReturnToMenu(string sceneName)
     {
-        if (chancesText == null) return;
+        StartCoroutine(ReturnToMenuRoutine(sceneName));
+    }
 
-        string warningMessage = "";
+    private IEnumerator ReturnToMenuRoutine(string sceneName)
+    {
+        Time.timeScale = 1f;
 
-        switch (warningIndex)
+        if(AudioManager.Instance != null)
         {
-            case 1:
-                warningMessage = "This is your 1st warning.";
-                break;
-
-            case 2:
-                warningMessage = "This is your 2nd warning.";
-                break;
-
-            case 3:
-                warningMessage = "This is your final warning.";
-                break;
-
-            default:
-                warningMessage = "";
-                break;
+            AudioManager.Instance.StartMenuMusicTransition();
+            yield return new WaitForSecondsRealtime(AudioManager.Instance.fadeDuration);
         }
 
-        chancesText.text = warningMessage;
+        SceneManager.LoadScene(sceneName);
     }
 }

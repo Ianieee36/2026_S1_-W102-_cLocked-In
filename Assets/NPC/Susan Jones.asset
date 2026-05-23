@@ -15,17 +15,24 @@ MonoBehaviour:
   npcName: Susan Jones
   npcPortrait: {fileID: 2413221731224825401, guid: 00d3c9ba31e691c4098215f53571a644, type: 3}
   dialogueLines:
-  - SLAAAYY QUEEEN.
-  - hold on Sherry, someone wants a word.
-  - You need anything?
-  - if not then you can like go away.
+  - If you're looking for Suzie, she's probably blaming me for something again.
+  - 'Apparently borrowing one paper clip '
+  - is now considered a federal crime
+  - We're twins. It's basically a full-time competitive sport.
+  - Smart choice. HR already gave up on us.
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 0000
-  endDialogueLines: 
+  autoProgressLines: 0101000000
+  endDialogueLines: 0000010101
   autoProgressDelay: 2
-  choices: []
+  choices:
+  - dialogueIndex: 2
+    choices:
+    - You two argue a lot?
+    - I'm staying out of this.
+    nextDialogueIndexes: 0300000004000000
+    givesQuest: 
   questInProgressIndex: 0
   questCompletedIndex: 0
   quest: {fileID: 0}

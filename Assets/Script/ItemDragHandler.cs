@@ -150,6 +150,14 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         GameObject dropItem = Instantiate(gameObject, dropPosition, Quaternion.identity);
         Item droppedItem = dropItem.GetComponent<Item>();
         droppedItem.quantity = 1;
+        droppedItem.UpdateQuantityDisplay();
+
+        DroppedItem droppedItemScript = dropItem.GetComponent<DroppedItem>();
+
+        if(droppedItemScript != null)
+        {
+            droppedItemScript.PlayDropEffects();
+        }
 
         //Destroy the UI one
         if(quantity <= 1 && originalSlot.currentItem == null)
@@ -188,6 +196,13 @@ public class ItemDragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, I
         Item droppedItem = droppedObject.GetComponent<Item>();
         droppedItem.quantity = 1;
         droppedItem.UpdateQuantityDisplay();
+
+        DroppedItem droppedItemScript = droppedObject.GetComponent<DroppedItem>();
+
+        if(droppedItemScript != null)
+        {
+            droppedItemScript.PlayDropEffects();
+        }
 
         // Remove only 1 from stack 
         item.RemoveFromStack(1);

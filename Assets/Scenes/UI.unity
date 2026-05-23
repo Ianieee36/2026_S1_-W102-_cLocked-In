@@ -474,6 +474,7 @@ MonoBehaviour:
   dayLengthInSeconds: 120
   currentTime: 0
   currentDay: 1
+  endOfDayTriggered: 0
 --- !u!4 &697623359
 Transform:
   m_ObjectHideFlags: 0

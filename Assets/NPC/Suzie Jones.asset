@@ -13,16 +13,28 @@ MonoBehaviour:
   m_Name: Suzie Jones
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   npcName: Suzie Jones
-  npcPortrait: {fileID: 21300000, guid: 690c8f9ca4eb0d946a2580f72060a55b, type: 3}
+  npcPortrait: {fileID: 2413221731224825401, guid: 00d3c9ba31e691c4098215f53571a644, type: 3}
   dialogueLines:
-  - Hi. I'm Susan's Twin sister Suzie
+  - Hey, are you heading near the supply room?
+  - My sister Susan borrowed my paper clips three days ago and somehow turned it
+    into an office-wide incident.
+  - Thanks. If susan asks, tell her these are mine.
+  - Wow. Even Susan would've been more helpful than that. Actually... now she wouldn't
+  - I swear, working with your twin should qualify for hazard pay.
+  - Perfect. Now maybe Susan will stop stealing mine every morning
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 
-  endDialogueLines: 
+  autoProgressLines: 010000000000
+  endDialogueLines: 000001010101
   autoProgressDelay: 2
-  choices: []
-  questInProgressIndex: 0
-  questCompletedIndex: 0
-  quest: {fileID: 0}
+  choices:
+  - dialogueIndex: 1
+    choices:
+    - I'll grab some for you
+    - Sounds like sibling warfare.
+    nextDialogueIndexes: 0200000003000000
+    givesQuest: 0100
+  questInProgressIndex: 4
+  questCompletedIndex: 5
+  quest: {fileID: 11400000, guid: ea79643f960494e3a84e68a055e13531, type: 2}

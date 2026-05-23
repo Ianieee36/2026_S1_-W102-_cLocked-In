@@ -15,16 +15,26 @@ MonoBehaviour:
   npcName: Stewie Griffin
   npcPortrait: {fileID: 2324835092603669600, guid: f353a623ba826354ba3611adfcc68ab4, type: 3}
   dialogueLines:
-  - I asked Peter for Paper clips yesterday.
-  - That fat man didn't give me any.
-  - I need to get organized soon.
+  - You there. Office peasant
+  - I require a paper clip immediately. My documents are descending into chaos
+  - Excellent. Finally, someone with at least two functioning breain cells.
+  - Pathetic. Even John would've helped me
+  - Still waiting on that paper clip. Civilization is crumbling.
+  - Ah, splendid.
+  - You've delayed corporate collapse for another day.
   typingSpeed: 0.05
   voiceSound: {fileID: 0}
   voicePitch: 1
-  autoProgressLines: 010100
-  endDialogueLines: 
+  autoProgressLines: 01000000000000
+  endDialogueLines: 00000101010001
   autoProgressDelay: 2
-  choices: []
-  questInProgressIndex: 0
-  questCompletedIndex: 0
-  quest: {fileID: 0}
+  choices:
+  - dialogueIndex: 1
+    choices:
+    - I'll get one
+    - Use tape like everyone else
+    nextDialogueIndexes: 0200000003000000
+    givesQuest: 0100
+  questInProgressIndex: 4
+  questCompletedIndex: 5
+  quest: {fileID: 11400000, guid: 79876693e55a044cda27c634cbe03c4b, type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Explosive Salad
   m_EditorClassIdentifier: Assembly-CSharp::NPCDialogue
   npcName: Explosive Salad
-  npcPortrait: {fileID: 21300000, guid: 690c8f9ca4eb0d946a2580f72060a55b, type: 3}
+  npcPortrait: {fileID: 21300000, guid: 0b28df9a51bf12e469f738617e843851, type: 3}
   dialogueLines:
   - Hi, I am Explosive Salad
   typingSpeed: 0.05
