@@ -3434,6 +3434,7 @@ GameObject:
   - component: {fileID: 2120789152}
   - component: {fileID: 2120789153}
   - component: {fileID: 2120789154}
+  - component: {fileID: 2120789155}
   m_Layer: 0
   m_Name: AccessibilityManager
   m_TagString: Untagged
@@ -3580,6 +3581,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2120789155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120789148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 370f49450eada433899a585c200d89ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlickerSettingsManager
+  flickerToggle: {fileID: 1386080437}
 --- !u!1 &2140108937
 GameObject:
   m_ObjectHideFlags: 0
