@@ -7,6 +7,8 @@ public class BossController : MonoBehaviour
 {
     UnityEngine.AI.NavMeshAgent agent; // Agent for Unity AI Pathfinding
 
+    // public playerInSafeZone; // <------- TODO: implement a safe zone check, this is just placeholder code might not be the actual implementation
+
     public Transform player; // Variable for the player, you'll have to find player game object on game load because it's not in this scene.
     public Transform VisionPivot; // Variable for the Vision Cone Pivot, drag and drop into the field in inspector.
     [HideInInspector] public float moveSpeed;
@@ -211,7 +213,7 @@ public class BossController : MonoBehaviour
         //Vector2 dir = (player.position - transform.position).normalized; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
 
         // Stops chasing when really close to avoid weird jittering.
-        if (dist > minChaseDistance)
+        if (dist > minChaseDistance /* || playerInSafeZone == true <------- TODO: implement a safe zone check, this is just placeholder code might not be the actual implementation*/)
         {
             //rb.linearVelocity = dir * chaseSpeed; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
             //RotateTowards(dir); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
