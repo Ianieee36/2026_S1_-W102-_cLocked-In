@@ -7,21 +7,23 @@ public class BossController : MonoBehaviour
 {
     UnityEngine.AI.NavMeshAgent agent; // Agent for Unity AI Pathfinding
 
-    // public playerInSafeZone; // <------- TODO: implement a safe zone check, this is just placeholder code might not be the actual implementation
-
+    [Header("Movement Variables")]
     public Transform player; // Variable for the player, you'll have to find player game object on game load because it's not in this scene.
     public Transform VisionPivot; // Variable for the Vision Cone Pivot, drag and drop into the field in inspector.
+    private Collider2D playerCollider; // Collider for the player, used for safe zone check
     [HideInInspector] public float moveSpeed;
     [HideInInspector] public float chaseSpeed; // Move faster when chasing
 
+    [Header("Vision Variables")]
     [HideInInspector] public float visionRange; // Vision cone
     [HideInInspector] public float visionAngle = 60f; // Vision cone
     public float minChaseDistance = 2f; // Stopping distance from player when chasing (just to avoid weird jittering)
     public LayerMask obstacleMask; // Variable for the obstacle mask for boss vision, you'll have to find obstacleMask on game load because it's not in this scene.
 
+    [Header("Deteection Variables")]
     public float detection = 0f; // Detection level (0 to 1)
-    [HideInInspector] public float detectionRate; // Speed at which detection increases
-    [HideInInspector] public float decayRate; // Speed at which detection decreasess
+    [HideInInspector] public float detectionRate; // Speed at which detection increases per second
+    [HideInInspector] public float decayRate; // Speed at which detection decreases per second
     [HideInInspector] public float timeToLose; // How lon g the player can stay at max detection before losing
     public float detectedTime = 0f; // How long the player has been at max detection
     public float rotationSpeed = 5f; // How fast the boss rotates towards the player
@@ -56,8 +58,6 @@ public class BossController : MonoBehaviour
 
     public TextMeshProUGUI detectionText;
 
-    //Rigidbody2D rb; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
-
     enum BossState { Patrol, Chase, Investigate }
     BossState state;
 
@@ -67,7 +67,6 @@ public class BossController : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        //rb = GetComponent<Rigidbody2D>(); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
         state = BossState.Patrol;
 
         if (DifficultyManager.Instance != null)
@@ -79,7 +78,8 @@ public class BossController : MonoBehaviour
 
         // Find player and waypoints in any scene
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        
+        playerCollider = player.GetComponent<Collider2D>();
+
 
         GameObject[] wpObjects = GameObject.FindGameObjectsWithTag("Waypoint");
 
@@ -113,16 +113,6 @@ public class BossController : MonoBehaviour
                 break;
         }
     }
-
-    //void MoveTo(Vector2 target) // ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
-    //{
-    //    // Move towards target (either player or waypoint)
-    //    Vector2 dir = (target - (Vector2)transform.position).normalized;
-    //    rb.linearVelocity = dir * moveSpeed;
-
-    //    // Rotate towards movement direction
-    //    RotateTowards(dir);
-    //}
 
 
     public void InvestigateSound(Vector3 soundPosition)
@@ -181,14 +171,6 @@ public class BossController : MonoBehaviour
         // Sets target to current waypoint
         Transform target = waypoints[currentWaypoint];
 
-        //MoveTo(target.position); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
-
-        // If close enough to the waypoint switch to the next one
-        //if (Vector2.Distance(transform.position, target.position) < 0.2f) ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
-        //{
-        //    currentWaypoint = (currentWaypoint + 1) % waypoints.Length;
-        //}
-
         agent.speed = moveSpeed;
         agent.SetDestination(target.position);
 
@@ -207,16 +189,21 @@ public class BossController : MonoBehaviour
     {
         float dist = Vector2.Distance(transform.position, player.position);
 
+        bool playerInSafeZone = SafeZone.Instance != null && SafeZone.Instance.IsInside(playerCollider); // Safe zone boolean
+
         // New AI Pathfinding stuff
         agent.speed = chaseSpeed;
 
-        //Vector2 dir = (player.position - transform.position).normalized; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
+        // Safe zone check
+        if (playerInSafeZone)
+        {
+            Patrol(); // If player is in safe zone, boss goes back to patrolling
+            return;
+        }
 
         // Stops chasing when really close to avoid weird jittering.
-        if (dist > minChaseDistance /* || playerInSafeZone == true <------- TODO: implement a safe zone check, this is just placeholder code might not be the actual implementation*/)
+        if (dist > minChaseDistance)
         {
-            //rb.linearVelocity = dir * chaseSpeed; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
-            //RotateTowards(dir); ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
             agent.isStopped = false;
             agent.SetDestination(player.position);
 
@@ -227,7 +214,6 @@ public class BossController : MonoBehaviour
         }
         else
         {
-            //rb.linearVelocity = Vector2.zero; ** old code, not using rigidbody anymore, we're now using the NavMesh Agent
             agent.isStopped = true;
         }
     }
