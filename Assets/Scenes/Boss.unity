@@ -801,9 +801,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1518800039}
-        m_TargetAssemblyTypeName: GeneralSceneTransition, Assembly-CSharp
-        m_MethodName: LoadSceneWithFade
+      - m_Target: {fileID: 1518800037}
+        m_TargetAssemblyTypeName: TryAgain, Assembly-CSharp
+        m_MethodName: ReturnToMenu
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1524,6 +1524,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TryAgain
   gameOverPanel: {fileID: 793502293}
   caughtPanel: {fileID: 822540956}
+  generalSceneTransition: {fileID: 1518800039}
   boss: {fileID: 1437423423}
   warningIndex: 0
   maxChances: 3

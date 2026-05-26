@@ -13,6 +13,9 @@ public class TryAgain : MonoBehaviour
     [Header("Caught UI")]
     public GameObject caughtPanel;
 
+    [Header("Scene Transition")]
+    public GeneralSceneTransition generalSceneTransition;   
+
     [Header("Boss")]
     public BossController boss;
     
@@ -21,6 +24,8 @@ public class TryAgain : MonoBehaviour
     public int maxChances = 3;
     private bool isCaught = false;
     public TextMeshProUGUI chancesText;
+
+    
 
     private void Awake()
     {
@@ -153,12 +158,21 @@ public class TryAgain : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        if(AudioManager.Instance != null)
+        if (AudioManager.Instance != null)
         {
             AudioManager.Instance.StartMenuMusicTransition();
-            yield return new WaitForSecondsRealtime(AudioManager.Instance.fadeDuration);
         }
 
-        SceneManager.LoadScene(sceneName);
+        if (generalSceneTransition != null)
+        {
+            generalSceneTransition.LoadSceneWithFade(sceneName);
+        }
+        else
+        {
+            Debug.LogWarning("GeneralSceneTransition is not assigned. Loading scene without screen fade.");
+            SceneManager.LoadScene(sceneName);
+        }
+
+        yield return null;
     }
 }
