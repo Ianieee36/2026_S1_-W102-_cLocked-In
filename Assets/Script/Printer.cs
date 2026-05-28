@@ -4,7 +4,7 @@ public class Printer : MonoBehaviour, IInteractable
 {
     public bool IsUsed { get; private set; }
     public string PrinterID {get; private set; }
-    public GameObject itemPrefab; //Item that chest drops
+    public GameObject itemPrefab; //Item that printer drops
     
     public Sprite closeSprite;
     public Sprite farSprite;

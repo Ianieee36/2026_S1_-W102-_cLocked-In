@@ -35,20 +35,26 @@ public class InteractionDetector : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
+{
+    IInteractable interactable =
+        collision.GetComponentInParent<IInteractable>();
+
+    if (interactable != null && interactable.CanInteract())
     {
-        if (collision.TryGetComponent(out IInteractable interactable) && interactable.CanInteract())
-        {
-            interactableInRange = interactable;
-            interactionIcon.SetActive(true);
-        }
+        interactableInRange = interactable;
+        interactionIcon.SetActive(true);
     }
+}
 
     private void OnTriggerExit2D(Collider2D collision)
+{
+    IInteractable interactable =
+        collision.GetComponentInParent<IInteractable>();
+
+    if (interactable != null && interactable == interactableInRange)
     {
-        if (collision.TryGetComponent(out IInteractable interactable) && interactable == interactableInRange)
-        {
-            interactableInRange = null;
-            interactionIcon.SetActive(false);
-        }
+        interactableInRange = null;
+        interactionIcon.SetActive(false);
     }
+}
 }
