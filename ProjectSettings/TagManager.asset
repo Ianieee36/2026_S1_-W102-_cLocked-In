@@ -7,6 +7,9 @@ TagManager:
   - Waypoint
   - BossCharacter
   - Item
+  - MapUI
+  - PlayerPing
+  - BossPing
   layers:
   - Default
   - TransparentFX
