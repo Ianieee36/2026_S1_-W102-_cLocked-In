@@ -420,6 +420,9 @@ public class BossController : MonoBehaviour
         state = BossState.Patrol;
         StopAlert();
     }
+
+    // Helper for unit tests
+    public string GetCurrentStateName() => state.ToString();
 }
 
 
