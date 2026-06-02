@@ -12,4 +12,9 @@ public class SaveData
     public List<QuestProgress> questProgressData;
     public List<string> handInQuestIDs;
     public List<string> pickedUpItemIDs;
+    public List<string> pickedUpWorldItems;
+    public int currentDay;
+    public float currentTime;
+    public float detection;
+    public float detectedTime;
 }

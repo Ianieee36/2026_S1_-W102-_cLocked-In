@@ -32,18 +32,21 @@ MonoBehaviour:
   - m_enabled: 1
     m_path: Assets/Scenes/AccessibilityMenu.unity
     m_guid: 2081276e09fd27a4ba43d3c32d065bfb
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/Main.unity
     m_guid: 70e473817987b2942a5439d155c5b552
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/Map.unity
     m_guid: d6ecb0e535ddab54ea4a13c81a0d4a0d
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/NPCs.unity
     m_guid: 80b48fd2ed12dfa46b3736e81c246122
-  - m_enabled: 1
+  - m_enabled: 0
     m_path: Assets/Scenes/Player.unity
     m_guid: 27c6940a64efd3842abf7b85b7e24194
+  - m_enabled: 1
+    m_path: Assets/Scenes/GamePlay.unity
+    m_guid: ce59d2ffdec2a4b8e8716e081704f176
   m_HasScriptingDefines: 0
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:

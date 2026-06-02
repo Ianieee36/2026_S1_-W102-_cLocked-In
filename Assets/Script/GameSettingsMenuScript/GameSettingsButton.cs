@@ -23,6 +23,9 @@ public class GameSettingsButton : MonoBehaviour
 
     public void NewGame(string sceneName)
     {
+        //Clear picked up items from memory
+        WorldItemSaveData.Clear();
+        
         // Delete existing save so it starts fresh
         string savePath = Path.Combine(Application.persistentDataPath, "saveData.json");
         if (File.Exists(savePath))
