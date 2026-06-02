@@ -29,6 +29,16 @@ public class InventoryController : MonoBehaviour
     void Start()
     {
         itemDictionary = FindObjectOfType<ItemDictionary>();
+
+        //Always create slots startup
+        if(inventoryPanel.transform.childCount == 0)
+        {
+            for (int i = 0; i < slotCount; i++)
+            {
+                Instantiate(slotPrefab, inventoryPanel.transform);
+            }
+        }
+        
         RebuildItemCounts();
         //for (int i = 0; i < slotCount; i++)
         //{

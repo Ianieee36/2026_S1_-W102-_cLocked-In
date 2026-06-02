@@ -22,6 +22,17 @@ public class HotbarController : MonoBehaviour
         }
     }
 
+
+    void Start()
+    {
+        if(hotbarPanel.transform.childCount == 0)
+        {
+            for (int i = 0; i < slotCount; i++)
+            {
+                Instantiate(slotPrefab, hotbarPanel.transform);
+            }
+        }
+    }
     // Update is called once per frame
     void Update()
     {
