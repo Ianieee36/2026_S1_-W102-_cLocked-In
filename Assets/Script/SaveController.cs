@@ -3,12 +3,11 @@ using System.IO;
 
 public class SaveController : MonoBehaviour
 {
-    public static SaveController Instance; // instance so that other scripts can access it globally.
+    public static SaveController Instance;
     private string saveLocation;
     private InventoryController inventoryController;
     private HotbarController hotbarController;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     private void Awake()
     {
         Instance = this;
@@ -16,11 +15,9 @@ public class SaveController : MonoBehaviour
     
     void Start()
     {
-        //Define save location
         saveLocation = Path.Combine(Application.persistentDataPath, "saveData.json");
         inventoryController = FindObjectOfType<InventoryController>();
         hotbarController = FindObjectOfType<HotbarController>();
-
         LoadGame();
     }
 
@@ -28,13 +25,14 @@ public class SaveController : MonoBehaviour
     {
         SaveData saveData = new SaveData
         {
+            sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, // added
             playerPosition = GameObject.FindGameObjectWithTag("Player").transform.position,
             bossPosition = GameObject.FindGameObjectWithTag("BossCharacter").transform.position,
             inventorySaveData = inventoryController.GetInventoryItems(),
             hotbarSaveData = hotbarController.GetHotbarItems(),
             questProgressData = QuestController.Instance.activateQuests,
             handInQuestIDs = QuestController.Instance.handInQuestIDs
-    };
+        };
         File.WriteAllText(saveLocation, JsonUtility.ToJson(saveData));
     }
 
@@ -51,10 +49,15 @@ public class SaveController : MonoBehaviour
 
             QuestController.Instance.LoadQuestProgress(saveData.questProgressData);
             QuestController.Instance.handInQuestIDs = saveData.handInQuestIDs;
-
-        } else
+        }
+        else
         {
             SaveGame();
         }
+    }
+
+    public bool HasSaveFile() // added
+    {
+        return File.Exists(saveLocation);
     }
 }
